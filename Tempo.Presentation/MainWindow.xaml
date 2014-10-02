@@ -4,21 +4,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" 
         x:Class="Tempo.Presentation.MainWindow"
-        Title="MainWindow" Height="400" Width="550">
+        Title="MainWindow" Height="400" Width="550" ResizeMode="NoResize">
 
     <Grid>
-        <ListBox Margin="8,0,8,10" ItemsSource="{Binding SongsList}" SelectedItem="{Binding SelectedSong}" Height="231" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalAlignment="Bottom">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0">
+            <Button Content="PlayButton" Command="{Binding PlayCommand}" HorizontalAlignment="Left" Margin="104,30,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button Content="ImportButton" Command="{Binding ImportCommand}" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" Width="75"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ListBox Margin="8,0,8,10" BorderThickness="0" HorizontalAlignment="Stretch" ItemsSource="{Binding SongsList}" SelectedItem="{Binding SelectedSong}" Height="Auto" VerticalAlignment="Top">
 
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding Name}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
 
-        </ListBox>
-        <Button Name="ImportButton" Command="{Binding ImportCommand}" Content="Import" HorizontalAlignment="Left" Margin="431,35,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="PlayButton" Command="{Binding PlayCommand}" HorizontalAlignment="Left" Margin="334,41,0,0" VerticalAlignment="Top" Width="75"/>
+            </ListBox>
+        </Grid>
+
     </Grid>
 </Window>
