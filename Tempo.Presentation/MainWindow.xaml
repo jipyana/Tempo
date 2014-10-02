@@ -18,6 +18,6 @@
             </ListBox.ItemTemplate>
 
         </ListBox>
-        <Button Name="ImportButton" Click="ImportButton_OnClick" Content="Import" HorizontalAlignment="Left" Margin="431,35,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="ImportButton" Command="{Binding ImportCommand}" Content="Import" HorizontalAlignment="Left" Margin="431,35,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>

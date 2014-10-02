@@ -7,7 +7,7 @@ namespace Tempo.Main.Model
     public interface IPlaylist
     {
         IReadOnlyCollection<ent::Song> GetAll();
-        void Add(ent::Song newSong);
+        void Add(IReadOnlyCollection<ent::Song> newSongs);
     }
 
     public interface ISongsImporter

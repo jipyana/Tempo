@@ -1,6 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using GalaSoft.MvvmLight.Command;
+using System.Collections.ObjectModel;
 using System.Windows;
-
+using System.Windows.Input;
+using Tempo.Main.Model;
+using Tempo.Main.Model.Impl;
 using ent = Tempo.Main.Entities;
 
 namespace Tempo.Presentation
@@ -25,6 +28,11 @@ namespace Tempo.Presentation
         public MainWindowViewModel()
         {
             this.SongsList = new ObservableCollection<ent::Song>();
+
+            songImporter = new SongsImporter();
+            playlist     = new DummyPlayList();
         }
+        private readonly ISongsImporter songImporter;
+        private readonly IPlaylist      playlist;
     }
 }

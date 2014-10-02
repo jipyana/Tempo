@@ -1,16 +1,28 @@
-﻿using System.Windows;
-
+﻿using GalaSoft.MvvmLight.Command;
+using System.Windows;
+using System.Windows.Input;
 using Tempo.Main.Model.Impl;
 
 namespace Tempo.Presentation
 {
-    public partial class MainWindow
+    public partial class MainWindowViewModel
     {
-        private void ImportButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            var songImporter = new SongsImporter();
+        private ICommand _importCommand;
 
-            songImporter.GetAll_fromDirectory();
+        public ICommand ImportCommand
+        {
+            get
+            {
+                if (_importCommand == null)
+                {
+                    _importCommand = new RelayCommand(() =>
+                        {
+                            var songsToImport = songImporter.GetAll_fromDirectory();
+                            playlist.Add(songsToImport);
+                        });
+                }
+                return _importCommand;
+            }
         }
     }
 }

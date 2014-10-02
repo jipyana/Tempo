@@ -46,9 +46,22 @@ namespace Tempo.Main.Model.Impl
         }
         private bool fileIsAcceptableByExtension(FileInfo fileInfo)
         {
-            var acceptableExtensions = new[]{ ".WAV" };
+            var acceptableExtensions = new[]{ ".WAV", ".MP3" };
 
             return acceptableExtensions.Contains(fileInfo.Extension.ToUpper());
+        }
+    }
+    public class DummyPlayList : IPlaylist
+    {
+        private readonly List<ent::Song> songsInPlaylist = new List<ent.Song>();
+        public IReadOnlyCollection<ent.Song> GetAll()
+        {
+            return songsInPlaylist;
+        }
+
+        public void Add(IReadOnlyCollection<ent.Song> newSongs)
+        {
+            songsInPlaylist.AddRange(newSongs);
         }
     }
 }
