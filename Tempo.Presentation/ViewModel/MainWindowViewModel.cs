@@ -1,9 +1,9 @@
-﻿using GalaSoft.MvvmLight.Command;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Input;
+
+using Tempo.Infrastructure.AudioPlayer;
 using Tempo.Main.Model;
-using Tempo.Main.Model.Impl;
+
 using ent = Tempo.Main.Entities;
 
 namespace Tempo.Presentation.ViewModel
@@ -28,15 +28,18 @@ namespace Tempo.Presentation.ViewModel
         public MainWindowViewModel
         (
             IPlaylist      playlist,
-            ISongsImporter songsImporter
+            ISongsImporter songsImporter,
+            IAudioPlayer   audioPlayer
         )
         {
             this.SongsList = new ObservableCollection<ent::Song>();
 
             this.playlist     = playlist;
             this.songImporter = songsImporter;
+            this.audioPlayer  = audioPlayer;
         }
         private readonly ISongsImporter songImporter;
         private readonly IPlaylist      playlist;
+        private readonly IAudioPlayer   audioPlayer;
     }
 }

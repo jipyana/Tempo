@@ -43,11 +43,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DelegateCommand.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="AudioPlayer\Commands\IPlayerCommand.cs" />
+    <Compile Include="AudioPlayer\IAudioPlayer.cs" />
+    <Compile Include="AudioPlayer\AudioPlayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tempo\Tempo.csproj">
+      <Project>{e428c60f-3b92-4488-8373-7edf6a87af1d}</Project>
+      <Name>Tempo</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

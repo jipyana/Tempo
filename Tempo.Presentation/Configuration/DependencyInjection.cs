@@ -2,6 +2,7 @@
 
 using Tempo.Main.Model;
 using Tempo.Main.Model.Impl;
+using Tempo.Infrastructure.AudioPlayer;
 
 namespace Tempo.Presentation.Configuration
 {
@@ -11,6 +12,8 @@ namespace Tempo.Presentation.Configuration
         {
             SimpleIoc.Default.Register<IPlaylist, DummyPlayList>();
             SimpleIoc.Default.Register<ISongsImporter, SongsImporter>();
+
+            SimpleIoc.Default.Register<IAudioPlayer, AudioPlayer>();
         }
     }
 }
