@@ -13,23 +13,26 @@ namespace Tempo.Presentation
             {
                 if (_importCommand == null)
                 {
-                    _importCommand = new RelayCommand(_importCommandAction);
+                    _importCommand = new RelayCommand(importCommandAction());
                 }
                 return _importCommand;
             }
         }
-        private readonly Action _importCommandAction = 
-            () =>
-            {
-                var songsToImport = songImporter.GetAll_fromDirectory();
-                playlist.Add(songsToImport);
-
-                // Update UI (TODO: Fix, this is an ugly approach)
-                this.SongsList.Clear();
-                foreach (var song in songsToImport)
+        private Action importCommandAction()
+        {
+            return new Action(
+                () =>
                 {
-                    this.SongsList.Add(song);
-                }
-            };
+                    var songsToImport = songImporter.GetAll_fromDirectory();
+                    playlist.Add(songsToImport);
+
+                    // Update UI (TODO: Fix, this is an ugly approach)
+                    this.SongsList.Clear();
+                    foreach (var song in songsToImport)
+                    {
+                        this.SongsList.Add(song);
+                    }
+                });
+        }
     }
 }
