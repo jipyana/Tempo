@@ -1,0 +1,18 @@
+﻿<Window x:Class="Tempo.Presentation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <ListBox Margin="8,0,8,10" ItemsSource="{Binding SongsList}" SelectedItem="{Binding SelectedSong}" Height="231" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalAlignment="Bottom">
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+        </ListBox>
+    </Grid>
+</Window>
