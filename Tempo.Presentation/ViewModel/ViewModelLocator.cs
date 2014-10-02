@@ -33,7 +33,7 @@ namespace Tempo.Presentation.ViewModel
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            Configuration.DependencyInjections.Register();
+            Configuration.DependencyInjection.Register();
 
             SimpleIoc.Default.Register<MainWindowViewModel>();
         }

@@ -5,7 +5,7 @@ using Tempo.Main.Model.Impl;
 
 namespace Tempo.Presentation.Configuration
 {
-    public abstract class DependencyInjections
+    public abstract class DependencyInjection
     {
         public static void Register()
         {
