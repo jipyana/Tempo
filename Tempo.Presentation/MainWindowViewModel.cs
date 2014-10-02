@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+
+using Tempo.Infrastructure.AudioPlayer;
 using Tempo.Main.Model;
 using Tempo.Main.Model.Impl;
 using ent = Tempo.Main.Entities;
@@ -31,8 +33,10 @@ namespace Tempo.Presentation
 
             songImporter = new SongsImporter();
             playlist     = new DummyPlayList();
+            audioPlayer  = new AudioPlayer();
         }
         private readonly ISongsImporter songImporter;
         private readonly IPlaylist      playlist;
+        private readonly IAudioPlayer   audioPlayer;
     }
 }

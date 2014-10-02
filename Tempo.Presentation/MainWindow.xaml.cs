@@ -13,11 +13,5 @@ namespace Tempo.Presentation
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
         }
-
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            var player = new Tempo.Infrastructure.Player();
-            player.Play();
-        }
     }
 }
