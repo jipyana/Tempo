@@ -12,7 +12,6 @@
   See http://www.galasoft.ch/mvvm
 */
 
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 
@@ -34,23 +33,18 @@ namespace Tempo.Presentation.ViewModel
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            SimpleIoc.Default.Register<IPlaylist, DummyPlayList>();
-            SimpleIoc.Default.Register<ISongsImporter, SongsImporter>();
+            Configuration.DependencyInjections.Register();
 
             SimpleIoc.Default.Register<MainWindowViewModel>();
         }
 
         public MainWindowViewModel Main
         {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MainWindowViewModel>();
-            }
+            get { return ServiceLocator.Current.GetInstance<MainWindowViewModel>(); }
         }
         
         public static void Cleanup()
-        {
-            // TODO Clear the ViewModels
+        { 
         }
     }
 }
