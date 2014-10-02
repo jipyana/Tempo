@@ -11,7 +11,7 @@ namespace Tempo.Presentation
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel();
+            //this.DataContext = new MainWindowViewModel();
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)

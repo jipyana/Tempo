@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Input;
 
-namespace Tempo.Presentation
+namespace Tempo.Presentation.ViewModel
 {
     public partial class MainWindowViewModel
     {

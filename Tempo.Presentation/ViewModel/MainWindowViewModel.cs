@@ -6,7 +6,7 @@ using Tempo.Main.Model;
 using Tempo.Main.Model.Impl;
 using ent = Tempo.Main.Entities;
 
-namespace Tempo.Presentation
+namespace Tempo.Presentation.ViewModel
 {
     public partial class MainWindowViewModel : DependencyObject
     {
@@ -25,12 +25,16 @@ namespace Tempo.Presentation
         public static readonly DependencyProperty SelectedSongProperty = DependencyProperty.Register("SelectedSong", typeof (ent::Song), typeof (MainWindowViewModel), new PropertyMetadata());
 
 
-        public MainWindowViewModel()
+        public MainWindowViewModel
+        (
+            IPlaylist      playlist,
+            ISongsImporter songsImporter
+        )
         {
             this.SongsList = new ObservableCollection<ent::Song>();
 
-            songImporter = new SongsImporter();
-            playlist     = new DummyPlayList();
+            this.playlist     = playlist;
+            this.songImporter = songsImporter;
         }
         private readonly ISongsImporter songImporter;
         private readonly IPlaylist      playlist;

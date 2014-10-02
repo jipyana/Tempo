@@ -16,6 +16,9 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 
+using Tempo.Main.Model;
+using Tempo.Main.Model.Impl;
+
 namespace Tempo.Presentation.ViewModel
 {
     /// <summary>
@@ -31,25 +34,17 @@ namespace Tempo.Presentation.ViewModel
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            ////if (ViewModelBase.IsInDesignModeStatic)
-            ////{
-            ////    // Create design time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DesignDataService>();
-            ////}
-            ////else
-            ////{
-            ////    // Create run time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DataService>();
-            ////}
+            SimpleIoc.Default.Register<IPlaylist, DummyPlayList>();
+            SimpleIoc.Default.Register<ISongsImporter, SongsImporter>();
 
-            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<MainWindowViewModel>();
         }
 
-        public MainViewModel Main
+        public MainWindowViewModel Main
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
+                return ServiceLocator.Current.GetInstance<MainWindowViewModel>();
             }
         }
         
