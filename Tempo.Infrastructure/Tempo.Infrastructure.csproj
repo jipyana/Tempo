@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DelegateCommand.cs" />
     <Compile Include="AudioPlayer\Commands\IPlayerCommand.cs" />
     <Compile Include="AudioPlayer\IAudioPlayer.cs" />
     <Compile Include="AudioPlayer\AudioPlayer.cs" />

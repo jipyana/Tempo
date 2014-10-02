@@ -14,7 +14,7 @@
 
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
-
+using System;
 using Tempo.Main.Model;
 using Tempo.Main.Model.Impl;
 
@@ -24,12 +24,12 @@ namespace Tempo.Presentation.ViewModel
     /// This class contains static references to all the view models in the
     /// application and provides an entry point for the bindings.
     /// </summary>
-    public class ViewModelLocator
+    public static class ViewModelLocator
     {
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
-        public ViewModelLocator()
+        static ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
@@ -38,9 +38,10 @@ namespace Tempo.Presentation.ViewModel
             SimpleIoc.Default.Register<MainWindowViewModel>();
         }
 
-        public MainWindowViewModel Main
+        private static Lazy<MainWindowViewModel> _main = new Lazy<MainWindowViewModel>(()=>{ return ServiceLocator.Current.GetInstance<MainWindowViewModel>(); });
+        public static MainWindowViewModel Main
         {
-            get { return ServiceLocator.Current.GetInstance<MainWindowViewModel>(); }
+            get { return _main.Value; }
         }
         
         public static void Cleanup()
