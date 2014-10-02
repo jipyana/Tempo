@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 using ent = Tempo.Main.Entities;
 
@@ -12,5 +8,10 @@ namespace Tempo.Main.Model
     {
         IReadOnlyCollection<ent::Song> GetAll();
         void Add(ent::Song newSong);
+    }
+
+    public interface ISongsImporter
+    {
+        IReadOnlyCollection<ent::Song> GetAll_fromDirectory(); 
     }
 }
