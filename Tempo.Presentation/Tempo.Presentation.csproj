@@ -66,6 +66,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\Stop.cs" />
     <Compile Include="Commands\Play.cs" />
     <Compile Include="Configuration\DependencyInjectioncs.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

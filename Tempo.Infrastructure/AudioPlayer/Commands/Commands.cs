@@ -7,20 +7,31 @@ using System.Threading.Tasks;
 using ent = Tempo.Main.Entities;
 namespace Tempo.Infrastructure.AudioPlayer.Commands
 {
-    public class Play : IAudioPlayerCommand
+    public abstract class Commands
     {
-        public Play
-        (
-            ent::Song songToPlay
-        )
+        public class Play : IAudioPlayerCommand
         {
-            this.songToPlay = songToPlay;
-        }
-        private readonly ent::Song songToPlay;
+            public Play
+            (
+                ent::Song songToPlay
+            )
+            {
+                this.songToPlay = songToPlay;
+            }
+            private readonly ent::Song songToPlay;
 
-        public void Execute(IAudioPlayer audioPlayer)
+            public void Execute(IAudioPlayer audioPlayer)
+            {
+                audioPlayer.Play(songToPlay);
+            }
+        }
+
+        public class Stop : IAudioPlayerCommand
         {
-            throw new NotImplementedException();
+            public void Execute(IAudioPlayer audioPlayer)
+            {
+                audioPlayer.Stop();
+            }
         }
     }
 }

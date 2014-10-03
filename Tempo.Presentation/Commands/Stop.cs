@@ -7,19 +7,19 @@ namespace Tempo.Presentation
 {
     public partial class MainWindowViewModel
     {
-        private ICommand _playCommand;
-        public ICommand PlayCommand
+        private ICommand _stopCommand;
+        public ICommand StopCommand
         {
             get
             {
-                if (_playCommand == null)
+                if (_stopCommand == null)
                 {
-                    _playCommand = new RelayCommand(playCommandAction());
+                    _stopCommand = new RelayCommand(stopCommandAction());
                 }
-                return _playCommand;
+                return _stopCommand;
             }
         }
-        private Action playCommandAction()
+        private Action stopCommandAction()
         {
             return new Action(
                 () =>
@@ -27,7 +27,7 @@ namespace Tempo.Presentation
                     if(this.SelectedSong != null) 
                     { 
                         audioPlayer.ProcessCommand(
-                            command: new Commands.Play(songToPlay: this.SelectedSong)
+                            command: new Commands.Stop()
                         );
                     }
                 });

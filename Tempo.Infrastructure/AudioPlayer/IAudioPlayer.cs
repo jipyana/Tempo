@@ -6,6 +6,7 @@ namespace Tempo.Infrastructure.AudioPlayer
     public interface IAudioPlayer
     {
         void Play(ent::Song song);
+        void Stop();
         void ProcessCommand(IAudioPlayerCommand command);
     }
 }
