@@ -26,12 +26,10 @@ namespace Tempo.Presentation
             return new Action(
                 () =>
                 {
-                    //if(this.SelectedSong != null) 
-                    //{ 
-                        audioPlayer.ProcessCommand(
-                            command: new Commands.Play(songToPlay: this.SelectedSong)
-                        );
-                    //}
+                    audioPlayer.ProcessCommand(
+                        command: new Commands.Play(songToPlay: this.SelectedSong)
+                    );
+                    this.PlayingSong = this.SelectedSong;
                 });
         }
         private Func<bool> playCommandCanExecute()

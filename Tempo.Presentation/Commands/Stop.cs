@@ -29,6 +29,7 @@ namespace Tempo.Presentation
                     audioPlayer.ProcessCommand(
                         command: new Commands.Stop()
                     );
+                    this.PlayingSong = null;
                 });
         }
         private Func<bool> stopCommandCanExecute()

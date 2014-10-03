@@ -25,6 +25,14 @@ namespace Tempo.Presentation
         }
         public static readonly DependencyProperty SelectedSongProperty = DependencyProperty.Register("SelectedSong", typeof (ent::Song), typeof (MainWindowViewModel), new PropertyMetadata());
 
+        public ent::Song PlayingSong
+        {
+            get { return (ent::Song) GetValue(PlayingSongProperty); }
+            set { SetValue(PlayingSongProperty, value); }
+        }
+
+        public static readonly DependencyProperty PlayingSongProperty = DependencyProperty.Register("PlayingSong", typeof (ent::Song), typeof (MainWindowViewModel), new PropertyMetadata());
+
 
         public MainWindowViewModel()
         {

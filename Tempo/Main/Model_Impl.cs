@@ -146,7 +146,11 @@ namespace Tempo.Main.Model.Impl
         }
         public int GetIndexOfSong(ent::Song song)
         {
-            return this.GetAll().IndexOf(song);
+            return
+                this.GetAll()
+                .Select(x => x.Uri)
+                .ToList()
+                .IndexOf(song.Uri);
         }
         public int GetNumberOfSong()
         {

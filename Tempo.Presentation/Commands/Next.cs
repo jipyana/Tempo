@@ -27,15 +27,11 @@ namespace Tempo.Presentation
                 () =>
                 {
                     var indexOfCurrentSong = playlist.GetIndexOfSong(audioPlayer.PlayingSong);
-                    var isThereNextSong = indexOfCurrentSong + 2 <= playlist.GetNumberOfSong();
-
-                    if(isThereNextSong)
-                    {
-                        var nextSong = playlist.GetOne_byIndex(indexOfCurrentSong + 1);
-                        audioPlayer.ProcessCommand(
-                            command: new Commands.Play(songToPlay: nextSong)
-                        );
-                    }
+                    var nextSong = playlist.GetOne_byIndex(indexOfCurrentSong + 1);
+                    audioPlayer.ProcessCommand(
+                        command: new Commands.Play(songToPlay: nextSong)
+                    );
+                     this.PlayingSong = nextSong ;
                 });
         }
         private Func<bool> nextCommandCanExecute()
@@ -43,10 +39,14 @@ namespace Tempo.Presentation
             return new Func<bool>(
                 () =>
                 {
-                    var indexOfCurrentSong = playlist.GetIndexOfSong(audioPlayer.PlayingSong);
-                    var isThereNextSong = indexOfCurrentSong + 2 <= playlist.GetNumberOfSong();
-                    
-                    return this.SelectedSong != null && isThereNextSong;
+                    if(audioPlayer.PlayingSong != null)
+                    {
+                        var indexOfCurrentSong = playlist.GetIndexOfSong(audioPlayer.PlayingSong);
+                        var isThereNextSong = indexOfCurrentSong + 2 <= playlist.GetNumberOfSong();
+                        
+                        return  isThereNextSong;
+                    }
+                    return false;
                 });
         }
     }

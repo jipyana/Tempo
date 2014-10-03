@@ -11,16 +11,18 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.3*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Button Content="Play" Command="{Binding PlayCommand}" HorizontalAlignment="Left" Margin="95,19.35,0,17.35" VerticalAlignment="Center" Width="75"/>
-            <Button Content="Previous" Command="{Binding PreviousCommand}" HorizontalAlignment="Left" Margin="15,19.35,0,17.35" VerticalAlignment="Center" Width="75"/>
-            <Button Content="Import" Command="{Binding ImportCommand}" HorizontalAlignment="Left" Margin="459,19.35,0,17.35" VerticalAlignment="Center" Width="75"/>
-            <Button Content="Next" Command="{Binding NextCommand}" HorizontalAlignment="Left" Margin="255,19.35,0,17.35" VerticalAlignment="Center" Width="75"/>
-            <Button Content="Stop" Command="{Binding StopCommand}" HorizontalAlignment="Left" Margin="175,19.35,0,17.35" VerticalAlignment="Center" Width="75"/>
+            <Button Content="Play" Command="{Binding PlayCommand}" HorizontalAlignment="Left" Margin="95,50,0,10" VerticalAlignment="Center" Width="75"/>
+            <Button Content="Previous" Command="{Binding PreviousCommand}" HorizontalAlignment="Left" Margin="15,50,0,10" VerticalAlignment="Center" Width="75"/>
+            <Button Content="Import" Command="{Binding ImportCommand}" HorizontalAlignment="Left" Margin="459,50,0,10" VerticalAlignment="Center" Width="75"/>
+            <Button Content="Next" Command="{Binding NextCommand}" HorizontalAlignment="Left" Margin="255,50,0,10" VerticalAlignment="Center" Width="75"/>
+            <Button Content="Stop" Command="{Binding StopCommand}" HorizontalAlignment="Left" Margin="175,50,0,10" VerticalAlignment="Center" Width="75"/>
+
+            <Label Content="{Binding PlayingSong.Name}" FontSize="20" HorizontalAlignment="Left" Margin="15,6,0,0" VerticalAlignment="Top" />
         </Grid>
         <Grid Grid.Row="1">
             <ListBox Margin="8,0,8,10" BorderThickness="0" HorizontalAlignment="Stretch" ItemsSource="{Binding SongsList}" SelectedItem="{Binding SelectedSong}" Height="Auto" VerticalAlignment="Top">
