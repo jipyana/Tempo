@@ -13,8 +13,8 @@
         </Grid.RowDefinitions>
         
         <Grid Grid.Row="0">
-            <Button Content="PlayButton" Command="{Binding PlayCommand}" HorizontalAlignment="Left" Margin="104,30,0,0" VerticalAlignment="Top" Width="75"/>
-            <Button Content="ImportButton" Command="{Binding ImportCommand}" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button Content="Play" Command="{Binding PlayCommand}" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button Content="Import" Command="{Binding ImportCommand}" HorizontalAlignment="Left" Margin="100,30,0,0" VerticalAlignment="Top" Width="75"/>
         </Grid>
         <Grid Grid.Row="1">
             <ListBox Margin="8,0,8,10" BorderThickness="0" HorizontalAlignment="Stretch" ItemsSource="{Binding SongsList}" SelectedItem="{Binding SelectedSong}" Height="Auto" VerticalAlignment="Top">

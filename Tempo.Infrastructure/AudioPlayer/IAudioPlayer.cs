@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using Tempo.Infrastructure.AudioPlayer.Commands;
 using ent = Tempo.Main.Entities;
 
 namespace Tempo.Infrastructure.AudioPlayer
@@ -11,5 +6,6 @@ namespace Tempo.Infrastructure.AudioPlayer
     public interface IAudioPlayer
     {
         void Play(ent::Song song);
+        void ProcessCommand(IAudioPlayerCommand command);
     }
 }

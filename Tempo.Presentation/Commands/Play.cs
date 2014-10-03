@@ -23,7 +23,7 @@ namespace Tempo.Presentation
             return new Action(
                 () =>
                 {
-                    audioPlayer.Play(this.SelectedSong);
+                    if(this.SelectedSong != null) { audioPlayer.Play(this.SelectedSong); }
                 });
         }
     }
