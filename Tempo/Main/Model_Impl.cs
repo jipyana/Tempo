@@ -84,7 +84,7 @@ namespace Tempo.Main.Model.Impl
     {
         private class Settings
         {
-            public string PlaylistRelativePath { get { return @"Assets\Data\Playlist.xml"; } }
+            public string PlaylistRelativePath { get { return @"Playlist.xml"; } }
             public string PlaylistAbsolutePath { get { return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PlaylistRelativePath); } }
         }
 
@@ -118,6 +118,7 @@ namespace Tempo.Main.Model.Impl
             }
         }
 
+
         public void Add(IReadOnlyCollection<ent::Song> newSongs)
         {
             foreach (var newSong in newSongs)
@@ -131,6 +132,7 @@ namespace Tempo.Main.Model.Impl
                 {
                     playlist = new XDocument();
                     playlist.Add(new XElement("record"));
+                    CreateNewEmptyPlaylist();
                 }
 
                 playlist
@@ -144,6 +146,11 @@ namespace Tempo.Main.Model.Impl
                 playlist.Save(_settings.PlaylistAbsolutePath);
             }
         }
+        private void CreateNewEmptyPlaylist()
+        {
+            using (FileStream fs = File.Create(_settings.PlaylistAbsolutePath));
+        }
+
         public int GetIndexOfSong(ent::Song song)
         {
             return
