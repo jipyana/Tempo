@@ -46,7 +46,7 @@ namespace Tempo.Main.Model.Impl
         }
         private bool fileIsAcceptableByExtension(FileInfo fileInfo)
         {
-            var acceptableExtensions = new[]{ ".WAV", ".MP3" };
+            var acceptableExtensions = new[]{ ".MP3" };
 
             return acceptableExtensions.Contains(fileInfo.Extension.ToUpper());
         }

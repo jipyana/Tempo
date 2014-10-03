@@ -14,6 +14,7 @@ namespace Tempo.Infrastructure.AudioPlayer
         (
         )
         {
+            this.Stop();
         }
         private WaveOut       waveOut { get; set; }
         private Mp3FileReader reader  { get; set; }
@@ -28,6 +29,7 @@ namespace Tempo.Infrastructure.AudioPlayer
             var reader = new Mp3FileReader(song.Uri.ToString());
             waveOut.Init(reader);
             waveOut.Play();
+            this.IsPlaying = true;
         }
 
         public void Stop()
@@ -43,11 +45,15 @@ namespace Tempo.Infrastructure.AudioPlayer
                 reader.Close();
                 reader.Dispose();
             }
+            this.IsPlaying = false;
         }
 
         public void ProcessCommand(IAudioPlayerCommand command)
         {
             command.Execute(this);
         }
+
+
+        public bool IsPlaying { get; private set; }
     }
 }

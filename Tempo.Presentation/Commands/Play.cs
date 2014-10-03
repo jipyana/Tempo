@@ -14,22 +14,30 @@ namespace Tempo.Presentation
             {
                 if (_playCommand == null)
                 {
-                    _playCommand = new RelayCommand(playCommandAction());
+                    _playCommand = new RelayCommand(playCommandExecute(),playCommandCanExecute());
                 }
                 return _playCommand;
             }
         }
-        private Action playCommandAction()
+        private Action playCommandExecute()
         {
             return new Action(
                 () =>
                 {
-                    if(this.SelectedSong != null) 
-                    { 
+                    //if(this.SelectedSong != null) 
+                    //{ 
                         audioPlayer.ProcessCommand(
                             command: new Commands.Play(songToPlay: this.SelectedSong)
                         );
-                    }
+                    //}
+                });
+        }
+        private Func<bool> playCommandCanExecute()
+        {
+            return new Func<bool>(
+                () =>
+                {
+                    return this.SelectedSong != null;
                 });
         }
     }

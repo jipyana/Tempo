@@ -8,5 +8,7 @@ namespace Tempo.Infrastructure.AudioPlayer
         void Play(ent::Song song);
         void Stop();
         void ProcessCommand(IAudioPlayerCommand command);
+
+        bool IsPlaying { get; }
     }
 }
