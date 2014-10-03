@@ -6,8 +6,11 @@ namespace Tempo.Main.Model
 {
     public interface IPlaylist
     {
-        IReadOnlyCollection<ent::Song> GetAll();
+        List<ent::Song> GetAll();
+        ent::Song GetOne_byIndex(int index);
         void Add(IReadOnlyCollection<ent::Song> newSongs);
+        int GetIndexOfSong(ent::Song song);
+        int GetNumberOfSong();
     }
 
     public interface ISongsImporter

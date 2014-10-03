@@ -55,7 +55,7 @@ namespace Tempo.Main.Model.Impl
     }
     public class DummyPlayList : IPlaylist
     {
-        public IReadOnlyCollection<ent.Song> GetAll()
+        public List<ent.Song> GetAll()
         {
             return songsInPlaylist;
         }
@@ -65,6 +65,19 @@ namespace Tempo.Main.Model.Impl
         public void Add(IReadOnlyCollection<ent.Song> newSongs)
         {
             songsInPlaylist.AddRange(newSongs);
+        }
+
+        public int GetIndexOfSong(ent::Song song)
+        {
+            return this.GetAll().IndexOf(song);
+        }
+        public int GetNumberOfSong()
+        {
+            return this.GetAll().Count;
+        }
+        public ent::Song GetOne_byIndex(int index)
+        {
+            return songsInPlaylist[index];
         }
     }
     public class XmlPlaylist : IPlaylist
@@ -83,7 +96,7 @@ namespace Tempo.Main.Model.Impl
         }
         private readonly Settings _settings;
 
-        public IReadOnlyCollection<ent::Song> GetAll()
+        public List<ent::Song> GetAll()
         {
             try
             {
@@ -130,6 +143,18 @@ namespace Tempo.Main.Model.Impl
 
                 playlist.Save(_settings.PlaylistAbsolutePath);
             }
+        }
+        public int GetIndexOfSong(ent::Song song)
+        {
+            return this.GetAll().IndexOf(song);
+        }
+        public int GetNumberOfSong()
+        {
+            return this.GetAll().Count;
+        }
+        public ent::Song GetOne_byIndex(int index)
+        {
+            return this.GetAll()[index];
         }
     }
 }
