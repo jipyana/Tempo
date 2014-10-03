@@ -53,11 +53,12 @@ namespace Tempo.Main.Model.Impl
     }
     public class DummyPlayList : IPlaylist
     {
-        private readonly List<ent::Song> songsInPlaylist = new List<ent.Song>();
         public IReadOnlyCollection<ent.Song> GetAll()
         {
             return songsInPlaylist;
         }
+        private readonly List<ent::Song> songsInPlaylist = new List<ent.Song>();
+
 
         public void Add(IReadOnlyCollection<ent.Song> newSongs)
         {

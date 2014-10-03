@@ -1,4 +1,6 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using System.Linq;
+
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Windows.Input;
 
@@ -27,7 +29,12 @@ namespace Tempo.Presentation
                     playlist.Add(songsToImport);
 
                     // Update UI (TODO: Fix, this is an ugly approach)
-                    this.SongsList.Clear();
+
+                    var songsToImport_nonDupilicates = 
+                        songsToImport.Where(
+                            import => !this.SongsList.Any(
+                                songInList => songInList.Uri.ToString() == import.Uri.ToString()
+                        )).ToList();
                     foreach (var song in songsToImport)
                     {
                         this.SongsList.Add(song);
