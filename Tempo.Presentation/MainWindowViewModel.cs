@@ -29,11 +29,11 @@ namespace Tempo.Presentation
 
         public MainWindowViewModel()
         {
-            this.SongsList = new ObservableCollection<ent::Song>();
-
             songImporter = new SongsImporter();
-            playlist     = new DummyPlayList();
+            playlist     = new XmlPlaylist();
             audioPlayer  = new AudioPlayer();
+
+            this.SongsList = new ObservableCollection<ent::Song>(playlist.GetAll());
         }
         private readonly ISongsImporter songImporter;
         private readonly IPlaylist      playlist;
