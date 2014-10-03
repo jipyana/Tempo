@@ -5,7 +5,7 @@ using GalaSoft.MvvmLight.Command;
 
 using Tempo.Infrastructure.AudioPlayer.Commands;
 
-namespace Tempo.Presentation
+namespace Tempo.Presentation.ViewModel
 {
     public partial class MainWindowViewModel
     {

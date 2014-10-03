@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 using GalaSoft.MvvmLight.Command;
 
-namespace Tempo.Presentation
+namespace Tempo.Presentation.ViewModel
 {
     public partial class MainWindowViewModel
     {

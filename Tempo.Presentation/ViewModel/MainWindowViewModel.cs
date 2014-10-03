@@ -7,7 +7,7 @@ using Tempo.Main.Model.Impl;
 
 using ent = Tempo.Main.Entities;
 
-namespace Tempo.Presentation
+namespace Tempo.Presentation.ViewModel
 {
     public partial class MainWindowViewModel : DependencyObject
     {
