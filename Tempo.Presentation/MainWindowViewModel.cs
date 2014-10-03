@@ -1,7 +1,5 @@
-﻿using GalaSoft.MvvmLight.Command;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Input;
 
 using Tempo.Infrastructure.AudioPlayer;
 using Tempo.Main.Model;
