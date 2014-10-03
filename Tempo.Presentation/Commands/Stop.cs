@@ -1,6 +1,8 @@
-﻿using GalaSoft.MvvmLight.Command;
-using System;
+﻿using System;
 using System.Windows.Input;
+
+using GalaSoft.MvvmLight.Command;
+
 using Tempo.Infrastructure.AudioPlayer.Commands;
 
 namespace Tempo.Presentation

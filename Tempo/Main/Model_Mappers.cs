@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Linq;
 
 using ent = Tempo.Main.Entities;
 
