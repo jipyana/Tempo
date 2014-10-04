@@ -1,9 +1,6 @@
 ﻿using System.Diagnostics.Contracts;
-
 using NAudio.Wave;
-
 using Tempo.Infrastructure.AudioPlayer.Commands;
-
 using ent = Tempo.Main.Entities;
 
 namespace Tempo.Infrastructure.AudioPlayer
@@ -14,10 +11,13 @@ namespace Tempo.Infrastructure.AudioPlayer
         (
         )
         {
-            this.Stop();
+            this.IsPlaying = false;
         }
         private WaveOut       waveOut { get; set; }
         private Mp3FileReader reader  { get; set; }
+
+        public bool      IsPlaying   { get; private set; }
+        public ent::Song PlayingSong { get; private set; }
 
 
         public void Play(ent::Song song)
@@ -55,10 +55,5 @@ namespace Tempo.Infrastructure.AudioPlayer
         {
             command.Execute(this);
         }
-
-
-        public bool      IsPlaying      { get; private set; }
-        public ent::Song PlayingSong { get; private set; }
-
     }
 }

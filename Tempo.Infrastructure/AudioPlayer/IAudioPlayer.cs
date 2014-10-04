@@ -10,7 +10,7 @@ namespace Tempo.Infrastructure.AudioPlayer
         void Stop();
         void ProcessCommand(IAudioPlayerCommand command);
 
-        bool      IsPlaying      { get; }
+        bool      IsPlaying   { get; }
         ent::Song PlayingSong { get; }
     }
 }
