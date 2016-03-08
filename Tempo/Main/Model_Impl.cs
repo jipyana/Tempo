@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
-
+using FluentAssertions;
 using ent = Tempo.Main.Entities;
 using map = Tempo.Main.Mappers;
 
@@ -55,37 +55,22 @@ namespace Tempo.Main.Model.Impl
     }
     public class DummyPlayList : IPlaylist
     {
-        public List<ent.Song> GetAll()
-        {
-            return songsInPlaylist;
-        }
         private readonly List<ent::Song> songsInPlaylist = new List<ent.Song>();
 
+        public List<ent::Song> GetAll() => songsInPlaylist;
 
-        public void Add(IReadOnlyCollection<ent.Song> newSongs)
-        {
-            songsInPlaylist.AddRange(newSongs);
-        }
+        public void Add(IReadOnlyCollection<ent.Song> newSongs) => songsInPlaylist.AddRange(newSongs);
 
-        public int GetIndexOfSong(ent::Song song)
-        {
-            return this.GetAll().IndexOf(song);
-        }
-        public int GetNumberOfSong()
-        {
-            return this.GetAll().Count;
-        }
-        public ent::Song GetOne_byIndex(int index)
-        {
-            return songsInPlaylist[index];
-        }
+        public int GetIndexOfSong(ent::Song song) => this.GetAll().IndexOf(song);
+        public int GetNumberOfSong() => this.GetAll().Count;
+        public ent::Song GetOne_byIndex(int index) => songsInPlaylist[index];
     }
     public class XmlPlaylist : IPlaylist
     {
         private class Settings
         {
-            public string PlaylistRelativePath { get { return @"Playlist.xml"; } }
-            public string PlaylistAbsolutePath { get { return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PlaylistRelativePath); } }
+            public string PlaylistRelativePath => "Playlist.xml";
+            public string PlaylistAbsolutePath => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PlaylistRelativePath);
         }
 
         public XmlPlaylist
@@ -135,6 +120,7 @@ namespace Tempo.Main.Model.Impl
                     CreateNewEmptyPlaylist();
                 }
 
+                playlist.Should().NotBeNull();
                 playlist
                     .Element("record").Add(
                         new XElement("song",
@@ -148,7 +134,7 @@ namespace Tempo.Main.Model.Impl
         }
         private void CreateNewEmptyPlaylist()
         {
-            using (FileStream fs = File.Create(_settings.PlaylistAbsolutePath));
+            using (File.Create(_settings.PlaylistAbsolutePath));
         }
 
         public int GetIndexOfSong(ent::Song song)
@@ -159,13 +145,7 @@ namespace Tempo.Main.Model.Impl
                 .ToList()
                 .IndexOf(song.Uri);
         }
-        public int GetNumberOfSong()
-        {
-            return this.GetAll().Count;
-        }
-        public ent::Song GetOne_byIndex(int index)
-        {
-            return this.GetAll()[index];
-        }
+        public int GetNumberOfSong() => this.GetAll().Count;
+        public ent::Song GetOne_byIndex(int index) => this.GetAll()[index];
     }
 }

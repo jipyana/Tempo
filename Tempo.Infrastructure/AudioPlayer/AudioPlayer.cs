@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.Contracts;
+﻿using FluentAssertions;
 using NAudio.Wave;
 using Tempo.Infrastructure.AudioPlayer.Commands;
 using ent = Tempo.Main.Entities;
@@ -22,7 +22,7 @@ namespace Tempo.Infrastructure.AudioPlayer
 
         public void Play(ent::Song song)
         {
-            Contract.Requires(song != null);
+            song.Should().NotBeNull();
             this.Stop();
 
             waveOut    = new WaveOut();

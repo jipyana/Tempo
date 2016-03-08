@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.Contracts;
+﻿using FluentAssertions;
 
 namespace Tempo.Main.Entities
 {
@@ -10,10 +10,10 @@ namespace Tempo.Main.Entities
             string uri
         )
         {
-            Contract.Requires(!string.IsNullOrEmpty     (name));
-            Contract.Requires(!string.IsNullOrWhiteSpace(name));
-            Contract.Requires(!string.IsNullOrEmpty     (uri));
-            Contract.Requires(!string.IsNullOrWhiteSpace(uri));
+            name.Should().NotBeNullOrEmpty();
+            name.Should().NotBeNullOrWhiteSpace();
+            uri.Should().NotBeNullOrEmpty();
+            uri.Should().NotBeNullOrWhiteSpace();
 
             Name = name;
             Uri  = uri;

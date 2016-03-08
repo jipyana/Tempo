@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-
+﻿using FluentAssertions;
 using ent = Tempo.Main.Entities;
 
 namespace Tempo.Infrastructure.AudioPlayer.Commands
@@ -13,7 +12,7 @@ namespace Tempo.Infrastructure.AudioPlayer.Commands
                 ent::Song songToPlay
             )
             {
-                Contract.Requires(songToPlay != null);
+                songToPlay.Should().NotBeNull();
 
                 this.songToPlay = songToPlay;
             }
@@ -21,7 +20,7 @@ namespace Tempo.Infrastructure.AudioPlayer.Commands
 
             public void Execute(IAudioPlayer audioPlayer)
             {
-                Contract.Requires(audioPlayer != null);
+                audioPlayer.Should().NotBeNull();
 
                 audioPlayer.Play(songToPlay);
             }
