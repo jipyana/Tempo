@@ -50,10 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AudioPlayer\AudioPlayer.cs" />
-    <Compile Include="AudioPlayer\Commands\IAudioPlayerCommand.cs" />
-    <Compile Include="AudioPlayer\Commands\Commands.cs" />
-    <Compile Include="AudioPlayer\IAudioPlayer.cs" />
+    <Compile Include="ListExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

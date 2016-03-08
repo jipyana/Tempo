@@ -5,10 +5,11 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d" 
         x:Class="Tempo.Presentation.MainWindow"
+        xmlns:c="clr-namespace:Tempo.Presentation.ViewModel"
         Title="Tempo" Height="400" Width="550" 
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowIconOnTitleBar="True" 
         Icon="Assets/Images/MetronomeIcon.png" EnableDWMDropShadow="True">
-
+ 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.3*" />
@@ -21,11 +22,15 @@
             <Button Content="Import" Command="{Binding ImportCommand}" HorizontalAlignment="Left" Margin="459,50,0,10" VerticalAlignment="Center" Width="75"/>
             <Button Content="Next" Command="{Binding NextCommand}" HorizontalAlignment="Left" Margin="255,50,0,10" VerticalAlignment="Center" Width="75"/>
             <Button Content="Stop" Command="{Binding StopCommand}" HorizontalAlignment="Left" Margin="175,50,0,10" VerticalAlignment="Center" Width="75"/>
+            <Button Content="Shuffle" Command="{Binding ShuffleCommand}" HorizontalAlignment="Left" Margin="335,50,0,10" VerticalAlignment="Center" Width="75"/>
 
             <Label Content="{Binding PlayingSong.Name}" FontSize="20" HorizontalAlignment="Left" Margin="15,6,0,0" VerticalAlignment="Top" />
         </Grid>
         <Grid Grid.Row="1">
-            <ListBox Margin="8,0,8,10" BorderThickness="0" HorizontalAlignment="Stretch" ItemsSource="{Binding SongsList}" SelectedItem="{Binding SelectedSong}" Height="Auto" VerticalAlignment="Top">
+            <ListBox Margin="8,0,8,10" BorderThickness="0" HorizontalAlignment="Stretch"
+                     ItemsSource="{Binding SongsList}" SelectedItem="{Binding SelectedSong}"
+                     MouseDoubleClick="PlaylistElement_OnMouseDoubleClick"
+                     Height="Auto" VerticalAlignment="Top">
 
                 <ListBox.ItemTemplate>
                     <DataTemplate>

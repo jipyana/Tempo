@@ -9,37 +9,26 @@ namespace Tempo.Presentation.ViewModel
     public partial class MainWindowViewModel
     {
         private ICommand _importCommand;
-        public ICommand ImportCommand
-        {
-            get
-            {
-                if (_importCommand == null)
-                {
-                    _importCommand = new RelayCommand(importCommandAction());
-                }
-                return _importCommand;
-            }
-        }
+        public ICommand ImportCommand => _importCommand ?? (_importCommand = new RelayCommand(importCommandAction()));
+
         private Action importCommandAction()
         {
-            return new Action(
-                () =>
+            return () =>
+            {
+                var songsToImport = songImporter.GetAll_fromDirectory();
+                playlist.Add(songsToImport);
+
+                // Update UI (TODO: Fix, this is an ugly approach)
+
+                var songsToImport_nonDupilicates = 
+                    songsToImport.Where(
+                        import => this.SongsList.All(songInList => songInList.Uri.ToString() != import.Uri.ToString())
+                        ).ToList();
+                foreach (var song in songsToImport_nonDupilicates)
                 {
-                    var songsToImport = songImporter.GetAll_fromDirectory();
-                    playlist.Add(songsToImport);
-
-                    // Update UI (TODO: Fix, this is an ugly approach)
-
-                    var songsToImport_nonDupilicates = 
-                        songsToImport.Where(
-                            import => !this.SongsList.Any(
-                                songInList => songInList.Uri.ToString() == import.Uri.ToString()
-                        )).ToList();
-                    foreach (var song in songsToImport)
-                    {
-                        this.SongsList.Add(song);
-                    }
-                });
+                    this.SongsList.Add(song);
+                }
+            };
         }
     }
 }

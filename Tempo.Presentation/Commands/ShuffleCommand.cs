@@ -2,16 +2,17 @@
 using System.Windows.Input;
 
 using GalaSoft.MvvmLight.Command;
+using Tempo.Extensions;
 using Tempo.Services.AudioPlayer.Commands;
 
 namespace Tempo.Presentation.ViewModel
 {
     public partial class MainWindowViewModel
     {
-        private ICommand _stopCommand;
-        public ICommand StopCommand => _stopCommand ?? (_stopCommand = new RelayCommand(stopCommandExecute(), stopCommandCanExecute()));
+        private ICommand _shuffleCommand;
+        public ICommand ShuffleCommand => _shuffleCommand ?? (_shuffleCommand = new RelayCommand(shuffleCommandExecute(), shuffleCommandCanExecute()));
 
-        private Action stopCommandExecute()
+        private Action shuffleCommandExecute()
         {
             return () =>
             {
@@ -19,11 +20,12 @@ namespace Tempo.Presentation.ViewModel
                     command: new Commands.Stop()
                     );
                 this.PlayingSong = null;
+                this.SongsList.Shuffle();
             };
         }
-        private Func<bool> stopCommandCanExecute()
+        private Func<bool> shuffleCommandCanExecute()
         {
-            return () => audioPlayer.IsPlaying;
+            return () => playlist.GetNumberOfSong() > 0;
         }
     }
 }

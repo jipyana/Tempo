@@ -2,52 +2,40 @@
 using System.Windows.Input;
 
 using GalaSoft.MvvmLight.Command;
-
-using Tempo.Infrastructure.AudioPlayer.Commands;
+using Tempo.Services.AudioPlayer.Commands;
 
 namespace Tempo.Presentation.ViewModel
 {
     public partial class MainWindowViewModel
     {
         private ICommand _nextCommand;
-        public ICommand NextCommand
-        {
-            get
-            {
-                if (_nextCommand == null)
-                {
-                    _nextCommand = new RelayCommand(nextCommandExecute(), nextCommandCanExecute());
-                }
-                return _nextCommand;
-            }
-        }
+        public ICommand NextCommand => _nextCommand ?? (_nextCommand = new RelayCommand(nextCommandExecute(), nextCommandCanExecute()));
+
         private Action nextCommandExecute()
         {
-            return new Action(
-                () =>
-                {
-                    var indexOfCurrentSong = playlist.GetIndexOfSong(audioPlayer.PlayingSong);
-                    var nextSong = playlist.GetOne_byIndex(indexOfCurrentSong + 1);
-                    audioPlayer.ProcessCommand(
-                        command: new Commands.Play(songToPlay: nextSong)
+            return () =>
+            {
+                var indexOfCurrentSong = playlist.GetIndexOfSong(audioPlayer.PlayingSong);
+                var nextSong = playlist.GetOne_byIndex(indexOfCurrentSong + 1);
+                audioPlayer.ProcessCommand(
+                    command: new Commands.Play(songToPlay: nextSong)
                     );
-                     this.PlayingSong = nextSong ;
-                });
+                this.PlayingSong = nextSong ;
+            };
         }
         private Func<bool> nextCommandCanExecute()
         {
-            return new Func<bool>(
-                () =>
+            return () =>
+            {
+                if(audioPlayer.PlayingSong != null)
                 {
-                    if(audioPlayer.PlayingSong != null)
-                    {
-                        var indexOfCurrentSong = playlist.GetIndexOfSong(audioPlayer.PlayingSong);
-                        var isThereNextSong = indexOfCurrentSong + 2 <= playlist.GetNumberOfSong();
+                    var indexOfCurrentSong = playlist.GetIndexOfSong(audioPlayer.PlayingSong);
+                    var isThereNextSong = indexOfCurrentSong + 2 <= playlist.GetNumberOfSong();
                         
-                        return  isThereNextSong;
-                    }
-                    return false;
-                });
+                    return  isThereNextSong;
+                }
+                return false;
+            };
         }
     }
 }

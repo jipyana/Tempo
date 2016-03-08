@@ -1,10 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
-
-using Tempo.Infrastructure.AudioPlayer;
 using Tempo.Main.Model;
 using Tempo.Main.Model.Impl;
-
+using Tempo.Services.AudioPlayer;
 using ent = Tempo.Main.Entities;
 
 namespace Tempo.Presentation.ViewModel

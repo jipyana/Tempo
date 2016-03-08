@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using FluentAssertions;
+using Tempo.Extensions;
 using ent = Tempo.Main.Entities;
 using map = Tempo.Main.Mappers;
 
@@ -53,6 +54,7 @@ namespace Tempo.Main.Model.Impl
             return acceptableExtensions.Contains(fileInfo.Extension.ToUpper());
         }
     }
+
     public class DummyPlayList : IPlaylist
     {
         private readonly List<ent::Song> songsInPlaylist = new List<ent.Song>();
@@ -63,8 +65,14 @@ namespace Tempo.Main.Model.Impl
 
         public int GetIndexOfSong(ent::Song song) => this.GetAll().IndexOf(song);
         public int GetNumberOfSong() => this.GetAll().Count;
+        public void Shuffle()
+        {
+            this.songsInPlaylist.Shuffle();
+        }
+
         public ent::Song GetOne_byIndex(int index) => songsInPlaylist[index];
     }
+
     public class XmlPlaylist : IPlaylist
     {
         private class Settings
@@ -146,6 +154,14 @@ namespace Tempo.Main.Model.Impl
                 .IndexOf(song.Uri);
         }
         public int GetNumberOfSong() => this.GetAll().Count;
+        public void Shuffle()
+        {
+            var newPlaylist = this.GetAll();
+            newPlaylist.Shuffle();
+            CreateNewEmptyPlaylist();
+            Add(newPlaylist);
+        }
+
         public ent::Song GetOne_byIndex(int index) => this.GetAll()[index];
     }
 }

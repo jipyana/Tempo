@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using ent = Tempo.Main.Entities;
 
-namespace Tempo.Infrastructure.AudioPlayer.Commands
+namespace Tempo.Services.AudioPlayer.Commands
 {
     public abstract class Commands
     {

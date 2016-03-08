@@ -2,43 +2,28 @@
 using System.Windows.Input;
 
 using GalaSoft.MvvmLight.Command;
-
-using Tempo.Infrastructure.AudioPlayer.Commands;
+using Tempo.Services.AudioPlayer.Commands;
 
 namespace Tempo.Presentation.ViewModel
 {
     public partial class MainWindowViewModel
     {
         private ICommand _playCommand;
-        public ICommand PlayCommand
-        {
-            get
-            {
-                if (_playCommand == null)
-                {
-                    _playCommand = new RelayCommand(playCommandExecute(),playCommandCanExecute());
-                }
-                return _playCommand;
-            }
-        }
+        public ICommand PlayCommand => _playCommand ?? (_playCommand = new RelayCommand(playCommandExecute(), playCommandCanExecute()));
+
         private Action playCommandExecute()
         {
-            return new Action(
-                () =>
-                {
-                    audioPlayer.ProcessCommand(
-                        command: new Commands.Play(songToPlay: this.SelectedSong)
+            return () =>
+            {
+                audioPlayer.ProcessCommand(
+                    command: new Commands.Play(songToPlay: this.SelectedSong)
                     );
-                    this.PlayingSong = this.SelectedSong;
-                });
+                this.PlayingSong = this.SelectedSong;
+            };
         }
         private Func<bool> playCommandCanExecute()
         {
-            return new Func<bool>(
-                () =>
-                {
-                    return this.SelectedSong != null;
-                });
+            return () => this.SelectedSong != null;
         }
     }
 }

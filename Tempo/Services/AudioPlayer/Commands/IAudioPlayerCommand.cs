@@ -1,4 +1,4 @@
-﻿namespace Tempo.Infrastructure.AudioPlayer.Commands
+﻿namespace Tempo.Services.AudioPlayer.Commands
 {
     public interface IAudioPlayerCommand
     {

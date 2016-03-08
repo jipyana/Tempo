@@ -72,6 +72,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\Previous.cs" />
     <Compile Include="Commands\Next.cs" />
+    <Compile Include="Commands\ShuffleCommand.cs" />
     <Compile Include="Commands\Stop.cs" />
     <Compile Include="Commands\Play.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -119,10 +120,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Tempo.Infrastructure\Tempo.Infrastructure.csproj">
-      <Project>{03cc8057-f00b-4a5c-8778-6549b51c9ed6}</Project>
-      <Name>Tempo.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Tempo\Tempo.csproj">
       <Project>{e428c60f-3b92-4488-8373-7edf6a87af1d}</Project>
       <Name>Tempo</Name>

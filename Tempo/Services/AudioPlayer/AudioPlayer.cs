@@ -1,9 +1,9 @@
 ﻿using FluentAssertions;
 using NAudio.Wave;
-using Tempo.Infrastructure.AudioPlayer.Commands;
+using Tempo.Services.AudioPlayer.Commands;
 using ent = Tempo.Main.Entities;
 
-namespace Tempo.Infrastructure.AudioPlayer
+namespace Tempo.Services.AudioPlayer
 {
     public class AudioPlayer : IAudioPlayer
     {

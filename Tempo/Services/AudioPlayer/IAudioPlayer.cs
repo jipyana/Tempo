@@ -1,8 +1,7 @@
-﻿using Tempo.Infrastructure.AudioPlayer.Commands;
-
+﻿using Tempo.Services.AudioPlayer.Commands;
 using ent = Tempo.Main.Entities;
 
-namespace Tempo.Infrastructure.AudioPlayer
+namespace Tempo.Services.AudioPlayer
 {
     public interface IAudioPlayer
     {
