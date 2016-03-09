@@ -70,6 +70,8 @@ namespace Tempo.Main.Model.Impl
             this.songsInPlaylist.Shuffle();
         }
 
+        public void Clear() => this.songsInPlaylist.Clear();
+
         public ent::Song GetOne_byIndex(int index) => songsInPlaylist[index];
     }
 
@@ -161,6 +163,8 @@ namespace Tempo.Main.Model.Impl
             CreateNewEmptyPlaylist();
             Add(newPlaylist);
         }
+
+        public void Clear() => this.CreateNewEmptyPlaylist();
 
         public ent::Song GetOne_byIndex(int index) => this.GetAll()[index];
     }

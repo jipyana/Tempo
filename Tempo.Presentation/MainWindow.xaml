@@ -5,8 +5,7 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d" 
         x:Class="Tempo.Presentation.MainWindow"
-        xmlns:c="clr-namespace:Tempo.Presentation.ViewModel"
-        Title="Tempo" Height="400" Width="550" 
+        Title="Tempo" Height="400" Width="650" 
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowIconOnTitleBar="True" 
         Icon="Assets/Images/MetronomeIcon.png" EnableDWMDropShadow="True">
  
@@ -19,19 +18,21 @@
         <Grid Grid.Row="0">
             <Button Content="Play" Command="{Binding PlayCommand}" HorizontalAlignment="Left" Margin="95,50,0,10" VerticalAlignment="Center" Width="75"/>
             <Button Content="Previous" Command="{Binding PreviousCommand}" HorizontalAlignment="Left" Margin="15,50,0,10" VerticalAlignment="Center" Width="75"/>
-            <Button Content="Import" Command="{Binding ImportCommand}" HorizontalAlignment="Left" Margin="459,50,0,10" VerticalAlignment="Center" Width="75"/>
+            <Button Content="Import" Command="{Binding ImportCommand}" HorizontalAlignment="Left" Margin="559,50,0,10" VerticalAlignment="Center" Width="75"/>
             <Button Content="Next" Command="{Binding NextCommand}" HorizontalAlignment="Left" Margin="255,50,0,10" VerticalAlignment="Center" Width="75"/>
             <Button Content="Stop" Command="{Binding StopCommand}" HorizontalAlignment="Left" Margin="175,50,0,10" VerticalAlignment="Center" Width="75"/>
             <Button Content="Shuffle" Command="{Binding ShuffleCommand}" HorizontalAlignment="Left" Margin="335,50,0,10" VerticalAlignment="Center" Width="75"/>
+            <Button Content="{Binding PlaybackLoopText}" Command="{Binding TogglePlaybackLoopCommand}" HorizontalAlignment="Left" Margin="335,50,0,10" VerticalAlignment="Center" Width="87"/>
+            <Button Content="Clear" Command="{Binding ClearCommand}" HorizontalAlignment="Left" Margin="427,51,0,10" VerticalAlignment="Center" Width="75"/>
 
             <Label Content="{Binding PlayingSong.Name}" FontSize="20" HorizontalAlignment="Left" Margin="15,6,0,0" VerticalAlignment="Top" />
         </Grid>
+
         <Grid Grid.Row="1">
             <ListBox Margin="8,0,8,10" BorderThickness="0" HorizontalAlignment="Stretch"
                      ItemsSource="{Binding SongsList}" SelectedItem="{Binding SelectedSong}"
                      MouseDoubleClick="PlaylistElement_OnMouseDoubleClick"
                      Height="Auto" VerticalAlignment="Top">
-
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -39,9 +40,8 @@
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-
             </ListBox>
         </Grid>
-
+        
     </Grid>
 </controls:MetroWindow>

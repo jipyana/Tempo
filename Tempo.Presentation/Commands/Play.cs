@@ -15,9 +15,7 @@ namespace Tempo.Presentation.ViewModel
         {
             return () =>
             {
-                audioPlayer.ProcessCommand(
-                    command: new Commands.Play(songToPlay: this.SelectedSong)
-                    );
+                audioPlayer.ProcessCommand(new Commands.Play(songToPlay: this.SelectedSong));
                 this.PlayingSong = this.SelectedSong;
             };
         }

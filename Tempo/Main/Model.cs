@@ -12,6 +12,7 @@ namespace Tempo.Main.Model
         int GetIndexOfSong(ent::Song song);
         int GetNumberOfSong();
         void Shuffle();
+        void Clear();
     }
 
     public interface ISongsImporter

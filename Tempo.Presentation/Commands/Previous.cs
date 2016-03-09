@@ -18,9 +18,7 @@ namespace Tempo.Presentation.ViewModel
             {
                 var indexOfCurrentSong = playlist.GetIndexOfSong(audioPlayer.PlayingSong);
                 var nextSong = playlist.GetOne_byIndex(indexOfCurrentSong - 1);
-                audioPlayer.ProcessCommand(
-                    command: new Commands.Play(songToPlay: nextSong)
-                    );
+                audioPlayer.ProcessCommand(new Commands.Play(songToPlay: nextSong));
                 this.PlayingSong = nextSong;
             };
         }

@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
-
 using GalaSoft.MvvmLight.Command;
-using Tempo.Extensions;
 using Tempo.Services.AudioPlayer.Commands;
+using ent = Tempo.Main.Entities;
 
 namespace Tempo.Presentation.ViewModel
 {
@@ -16,11 +16,10 @@ namespace Tempo.Presentation.ViewModel
         {
             return () =>
             {
-                audioPlayer.ProcessCommand(
-                    command: new Commands.Stop()
-                    );
+                audioPlayer.ProcessCommand(new Commands.Stop());
                 this.PlayingSong = null;
-                this.SongsList.Shuffle();
+                this.playlist.Shuffle();
+                this.SongsList = new ObservableCollection<ent::Song>(playlist.GetAll());
             };
         }
         private Func<bool> shuffleCommandCanExecute()

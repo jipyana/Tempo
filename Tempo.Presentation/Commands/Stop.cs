@@ -15,9 +15,7 @@ namespace Tempo.Presentation.ViewModel
         {
             return () =>
             {
-                audioPlayer.ProcessCommand(
-                    command: new Commands.Stop()
-                    );
+                audioPlayer.ProcessCommand(new Commands.Stop());
                 this.PlayingSong = null;
             };
         }
