@@ -16,14 +16,14 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Button Content="Play" Command="{Binding PlayCommand}" HorizontalAlignment="Left" Margin="95,50,0,10" VerticalAlignment="Center" Width="75"/>
-            <Button Content="Previous" Command="{Binding PreviousCommand}" HorizontalAlignment="Left" Margin="15,50,0,10" VerticalAlignment="Center" Width="75"/>
-            <Button Content="Import" Command="{Binding ImportCommand}" HorizontalAlignment="Left" Margin="559,50,0,10" VerticalAlignment="Center" Width="75"/>
-            <Button Content="Next" Command="{Binding NextCommand}" HorizontalAlignment="Left" Margin="255,50,0,10" VerticalAlignment="Center" Width="75"/>
-            <Button Content="Stop" Command="{Binding StopCommand}" HorizontalAlignment="Left" Margin="175,50,0,10" VerticalAlignment="Center" Width="75"/>
-            <Button Content="Shuffle" Command="{Binding ShuffleCommand}" HorizontalAlignment="Left" Margin="335,50,0,10" VerticalAlignment="Center" Width="75"/>
+            <Button Content="Play"     Command="{Binding PlayCommand}"     HorizontalAlignment="Left" Margin="95,50,0,10"  VerticalAlignment="Center" Width="75"/>
+            <Button Content="Previous" Command="{Binding PreviousCommand}" HorizontalAlignment="Left" Margin="15,50,0,10"  VerticalAlignment="Center" Width="75"/>
+            <Button Content="Import"   Command="{Binding ImportCommand}"   HorizontalAlignment="Left" Margin="559,50,0,10" VerticalAlignment="Center" Width="75"/>
+            <Button Content="Next"     Command="{Binding NextCommand}"     HorizontalAlignment="Left" Margin="255,50,0,10" VerticalAlignment="Center" Width="75"/>
+            <Button Content="Stop"     Command="{Binding StopCommand}"     HorizontalAlignment="Left" Margin="175,50,0,10" VerticalAlignment="Center" Width="75"/>
+            <Button Content="Shuffle"  Command="{Binding ShuffleCommand}"  HorizontalAlignment="Left" Margin="335,50,0,10" VerticalAlignment="Center" Width="75"/>
+            <Button Content="Clear"    Command="{Binding ClearCommand}"    HorizontalAlignment="Left" Margin="427,51,0,10" VerticalAlignment="Center" Width="75"/>
             <Button Content="{Binding PlaybackLoopText}" Command="{Binding TogglePlaybackLoopCommand}" HorizontalAlignment="Left" Margin="335,50,0,10" VerticalAlignment="Center" Width="87"/>
-            <Button Content="Clear" Command="{Binding ClearCommand}" HorizontalAlignment="Left" Margin="427,51,0,10" VerticalAlignment="Center" Width="75"/>
 
             <Label Content="{Binding PlayingSong.Name}" FontSize="20" HorizontalAlignment="Left" Margin="15,6,0,0" VerticalAlignment="Top" />
         </Grid>
