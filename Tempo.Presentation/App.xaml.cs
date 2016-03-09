@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using MahApps.Metro;
 
 namespace Tempo.Presentation
 {
@@ -7,5 +8,12 @@ namespace Tempo.Presentation
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            ThemeManager.ChangeAppStyle(
+                Application.Current,
+                ThemeManager.GetAccent("Teal"),
+                ThemeManager.GetAppTheme("BaseLight"));
+        }
     }
 }
