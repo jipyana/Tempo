@@ -7,19 +7,20 @@ namespace Tempo.Presentation
 {
     public partial class SettingsWindow : MetroWindow
     {
+        private readonly List<string> allThemes = new List<string>()
+        {
+            "Teal",
+            "Violet",
+            "Red",
+            "Green",
+            "Blue"
+        };
+
         public SettingsWindow()
         {
             InitializeComponent();
             var appStyle = ThemeManager.DetectAppStyle(Application.Current);
 
-            var allThemes = new List<string>()
-            {
-                "Teal",
-                "Violet",
-                "Red",
-                "Green",
-                "Blue"
-            };
             this.ThemePicker.ItemsSource = allThemes;
             this.ThemePicker.SelectedItem = allThemes.Find(_ => _ == appStyle.Item2.Name);
         }

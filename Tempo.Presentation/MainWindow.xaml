@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d" 
         x:Class="Tempo.Presentation.MainWindow"
         Title="Tempo" Height="400" Width="650" 
@@ -20,14 +21,19 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Button Content="Play" Command="{Binding PlayCommand}" HorizontalAlignment="Left" Margin="95,50,0,10" VerticalAlignment="Center" Width="75"/>
-            <Button Content="Previous" Command="{Binding PreviousCommand}" HorizontalAlignment="Left" Margin="15,50,0,10" VerticalAlignment="Center" Width="75"/>
+            <Button fa:Awesome.Content="StepBackward" Command="{Binding PreviousCommand}" HorizontalAlignment="Left" Margin="60,50,0,10" VerticalAlignment="Center" Width="30"
+                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
+            <Button fa:Awesome.Content="Play"  Command="{Binding PlayCommand}" HorizontalAlignment="Left" Margin="95,50,0,10" VerticalAlignment="Center" Width="30"
+                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
+            <Button fa:Awesome.Content="Stop" Command="{Binding StopCommand}" HorizontalAlignment="Left" Margin="130,50,0,10" VerticalAlignment="Center" Width="30"
+                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
+            <Button fa:Awesome.Content="StepForward" Command="{Binding NextCommand}" HorizontalAlignment="Left" Margin="165,50,0,10" VerticalAlignment="Center" Width="30"
+                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
             <Button Content="Import" Command="{Binding ImportCommand}" HorizontalAlignment="Left" Margin="559,50,0,10" VerticalAlignment="Center" Width="75"/>
-            <Button Content="Next" Command="{Binding NextCommand}" HorizontalAlignment="Left" Margin="255,50,0,10" VerticalAlignment="Center" Width="75"/>
-            <Button Content="Stop" Command="{Binding StopCommand}" HorizontalAlignment="Left" Margin="175,50,0,10" VerticalAlignment="Center" Width="75"/>
-            <Button Content="Shuffle" Command="{Binding ShuffleCommand}" HorizontalAlignment="Left" Margin="335,50,0,10" VerticalAlignment="Center" Width="75"/>
+            <Button fa:Awesome.Content="Random" Command="{Binding ShuffleCommand}" HorizontalAlignment="Left" Margin="300,50,0,10" VerticalAlignment="Center" Width="30"
+                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
             <Button Content="{Binding PlaybackLoopText}" Command="{Binding TogglePlaybackLoopCommand}" HorizontalAlignment="Left" Margin="335,50,0,10" VerticalAlignment="Center" Width="87"/>
-            <Button Content="Clear" Command="{Binding ClearCommand}" HorizontalAlignment="Left" Margin="427,51,0,10" VerticalAlignment="Center" Width="75"/>
+            <Button Content="Clear" Command="{Binding ClearCommand}" HorizontalAlignment="Left" Margin="479,50,0,10" VerticalAlignment="Center" Width="75"/>
 
             <Label Content="{Binding PlayingSong.Name}" FontSize="20" HorizontalAlignment="Left" Margin="15,6,0,0" VerticalAlignment="Top" />
         </Grid>

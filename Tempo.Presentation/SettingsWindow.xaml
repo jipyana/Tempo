@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title="Settings Window" Height="121.37" Width="230.274"
+        Title="Settings Window" Height="126.49" Width="230.274"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         BorderThickness="0" GlowBrush="Black"
         IsCloseButtonEnabled="False">
@@ -14,9 +14,9 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label Content="Theme" HorizontalAlignment="Left" Margin="0,23,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
-        <ComboBox Name="ThemePicker" HorizontalAlignment="Left" Height="26" Margin="55,23,0,0" VerticalAlignment="Top" Width="130" Grid.RowSpan="2"/>
-        <Button Content="Save" Click="SaveChanges" HorizontalAlignment="Left" Margin="13,17,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1"/>
-        <Button Content="Discard" Click="DiscardChanges" HorizontalAlignment="Left" Margin="93,17,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1"/>
+        <Label Content="Theme" HorizontalAlignment="Left" Margin="0,19,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="ThemePicker" HorizontalAlignment="Left" Height="26" Margin="55,19,0,0" VerticalAlignment="Top" Width="130"/>
+        <Button Content="Save" Click="SaveChanges" HorizontalAlignment="Left" Margin="17,11,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1"/>
+        <Button Content="Discard" Click="DiscardChanges" HorizontalAlignment="Left" Margin="97,11,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1"/>
     </Grid>
 </controls:MetroWindow>

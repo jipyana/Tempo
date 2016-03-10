@@ -18,8 +18,6 @@ namespace Tempo.Presentation.ViewModel
                 var songsToImport = songImporter.GetAll_fromDirectory();
                 playlist.Add(songsToImport);
 
-                // Update UI (TODO: Fix, this is an ugly approach)
-
                 var songsToImport_nonDupilicates = 
                     songsToImport.Where(
                         import => this.SongsList.All(songInList => songInList.Uri.ToString() != import.Uri.ToString())
