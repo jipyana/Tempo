@@ -55,12 +55,13 @@
 
             </Grid>
         </Grid>
-        <Grid x:Name="GridMain" Height="469" Background="Aquamarine" ScrollViewer.HorizontalScrollBarVisibility="Visible">
             
 
+        <Grid x:Name="GridMain" Height="469" Background="Aquamarine" ScrollViewer.HorizontalScrollBarVisibility="Visible"
+              IsEnabled="True" Visibility="Visible">
         <Grid Margin="0,100,0,2">
             
-            <ListBox Margin="10,-90,10,10" BorderThickness="0" HorizontalAlignment="Stretch"
+            <ListBox x:Name="songList" Margin="10,-90,10,10" BorderThickness="2" HorizontalAlignment="Stretch"
                      ItemsSource="{Binding SongsList}" SelectedItem="{Binding SelectedSong}"
                      MouseDoubleClick="PlaylistElement_OnMouseDoubleClick"
                      
