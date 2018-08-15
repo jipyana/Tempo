@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
 
@@ -26,6 +28,27 @@ namespace Tempo.Presentation
         {
             var window = new SettingsWindow();
             window.ShowDialog();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            int index = int.Parse(((Button)e.Source).Uid);
+
+            GridCursor.Margin = new Thickness(10 + (150 * index), 0, 0, 0);
+
+            switch (index)
+            {
+                case 0:
+                    GridMain.Background = Brushes.Aquamarine;
+                    break;
+                case 1:
+                    GridMain.Background = Brushes.Beige;
+                    break;
+                case 2:
+                    GridMain.Background = Brushes.CadetBlue;
+                    break;
+              
+            }
         }
     }
 }
