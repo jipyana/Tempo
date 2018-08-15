@@ -54,6 +54,8 @@ namespace Tempo.Services.AudioPlayer
             this.PlayingSong = null;
         }
 
+        //Add Pause
+
         public void ProcessCommand(IAudioPlayerCommand command)
         {
             command.Execute(this);
