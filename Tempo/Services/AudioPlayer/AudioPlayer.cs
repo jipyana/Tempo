@@ -11,11 +11,13 @@ namespace Tempo.Services.AudioPlayer
         (
         )
         {
+            this.IsPaused  = false;
             this.IsPlaying = false;
         }
         private WaveOut       waveOut { get; set; }
         private Mp3FileReader reader  { get; set; }
 
+        public bool         IsPaused            { get; private set; }
         public bool         IsPlaying           { get; private set; }
         public ent::Song    PlayingSong         { get; private set; }
 
@@ -33,8 +35,26 @@ namespace Tempo.Services.AudioPlayer
             waveOut.Play();
             waveOut.PlaybackStopped += (sender, args) => OnPlaybackEnded?.Invoke();
 
+            this.IsPaused    = false;
             this.IsPlaying   = true;
             this.PlayingSong = song;
+        }
+
+        public void Pause()
+        {
+            if (waveOut != null)
+            {
+                if (!IsPaused)
+                {
+                    waveOut.Pause();
+                    IsPaused = true;
+                }
+                else
+                {
+                    waveOut.Resume();
+                    IsPaused = false;
+                }
+            }
         }
 
         public void Stop()

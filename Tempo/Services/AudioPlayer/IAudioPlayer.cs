@@ -8,6 +8,7 @@ namespace Tempo.Services.AudioPlayer
     {
         void Play(ent::Song song);
         void Stop();
+        void Pause();
         void ProcessCommand(IAudioPlayerCommand command);
 
         bool        IsPlaying           { get; }
