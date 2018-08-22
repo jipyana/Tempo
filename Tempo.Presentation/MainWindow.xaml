@@ -21,9 +21,11 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Button fa:Awesome.Content="StepBackward" Command="{Binding PreviousCommand}" HorizontalAlignment="Left" Margin="60,50,0,10" VerticalAlignment="Center" Width="30"
+            <Button fa:Awesome.Content="StepBackward" Command="{Binding PreviousCommand}" HorizontalAlignment="Left" Margin="25,50,0,10" VerticalAlignment="Center" Width="30"
                     TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
-            <Button fa:Awesome.Content="Play"  Command="{Binding PlayCommand}" HorizontalAlignment="Left" Margin="95,50,0,10" VerticalAlignment="Center" Width="30"
+            <Button fa:Awesome.Content="Play"  Command="{Binding PlayCommand}" HorizontalAlignment="Left" Margin="60,50,0,10" VerticalAlignment="Center" Width="30"
+                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
+            <Button fa:Awesome.Content="Pause"  Command="{Binding PauseCommand}" HorizontalAlignment="Left" Margin="95,50,0,10" VerticalAlignment="Center" Width="30"
                     TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
             <Button fa:Awesome.Content="Stop" Command="{Binding StopCommand}" HorizontalAlignment="Left" Margin="130,50,0,10" VerticalAlignment="Center" Width="30"
                     TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>

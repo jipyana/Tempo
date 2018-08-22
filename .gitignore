@@ -109,3 +109,11 @@ UpgradeLog*.XML
 # SQL Server files
 App_Data/*.mdf
 App_Data/*.ldf
+
+*.lock
+
+\.vs/Tempo/v15/Server/sqlite3/storage\.ide
+
+\.vs/Tempo/v15/Server/sqlite3/storage\.ide-shm
+
+\.vs/Tempo/v15/Server/sqlite3/storage\.ide-wal
