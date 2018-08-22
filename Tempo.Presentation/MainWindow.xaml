@@ -4,12 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
-        mc:Ignorable="d" 
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    mc:Ignorable="d" 
         x:Class="Tempo.Presentation.MainWindow"
         Title="Tempo" Height="600" Width="1080"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowIconOnTitleBar="True" 
         Icon="Assets/Images/MetronomeIcon.png" BorderThickness="0" GlowBrush="Black">
-
 
 
 
@@ -18,17 +18,65 @@
             <Button Content="settings" Click="OpenSettingsWindow"/>
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
-    <StackPanel ScrollViewer.HorizontalScrollBarVisibility="Visible" CanVerticallyScroll="True">
+    <StackPanel >
 
         <Grid Height="auto">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10 0">
-                <Button Uid="0" Width="150" Content="HOME" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
-                <Button Uid="1" Width="150" Content="MY PLAYLISTS" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
-                <Button Uid="2" Width="150" Content="RECENTLY ADDED" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
+                <TabControl>
+                    <TabItem Width="150" Header="Home" Margin="0,0,0,-18">
+                        <Grid x:Name="GridMain" Height="512" Background="RosyBrown"
+              IsEnabled="True" Visibility="Visible" Margin="0,0,-603,0">
+                            <Grid Margin="0,100,0,2">
 
+                                
+                                    <ListBox x:Name="songList" Margin="20,-30,20,20"  
+                                          HorizontalAlignment="Stretch"
+                     ItemsSource="{Binding SongsList}" SelectedItem="{Binding SelectedSong}"
+                     MouseDoubleClick="PlaylistElement_OnMouseDoubleClick"
+                     
+                      VerticalAlignment="Top" Grid.ColumnSpan="3">
+                                        <ListBox.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="10"/>
+                                            </Style>
+                                        </ListBox.Resources>
+                                        <ListBox.ItemTemplate>
+
+                                            <DataTemplate>
+                                                <StackPanel>
+
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                               
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+               
+                
+                    <TabItem Width="150" Header="My Playlists" Margin="-33,0,33,-18">
+                        <Grid x:Name="GridMain2" Height="512" Background="RosyBrown"
+              IsEnabled="True" Visibility="Visible" Margin="0,0,-603,0">
+                            <Grid Margin="0,100,0,2">
+
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+                
+               
+                    <TabItem Width="150" Header="Recently Added" Margin="0,0,0,-18">
+                        <Grid x:Name="GridMain3" Height="512" Background="RosyBrown"
+              IsEnabled="True" Visibility="Visible" Margin="0,0,-603,0">
+                            <Grid Margin="0,100,0,2">
+
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
             </StackPanel>
-            <Grid x:Name="GridCursor" Width="150" Height="5" Background="#FF2196F3" HorizontalAlignment="Left" Margin="10 0"/>
-            <Grid Margin="29,15,-29,0">
+            <Grid Margin="20,0,0,465">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="211*"/>
@@ -50,33 +98,14 @@
                     TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome" RenderTransformOrigin="7.233,0.48" Height="25" Grid.Column="2"/>
                 <Button Content="{Binding PlaybackLoopText}" Command="{Binding TogglePlaybackLoopCommand}" HorizontalAlignment="Left" Margin="201,50,0,10" VerticalAlignment="Center" Width="87" Grid.Column="2" Height="25" Grid.ColumnSpan="2"/>
                 <Button Content="Clear" Command="{Binding ClearCommand}" HorizontalAlignment="Left" Margin="250,50,0,10" VerticalAlignment="Center" Width="75" Grid.Column="3" Height="25"/>
-
                 <Label Content="{Binding PlayingSong.Name}" FontSize="20" HorizontalAlignment="Left" Margin="15,6,0,0" VerticalAlignment="Top" Height="10" Width="10" />
 
             </Grid>
         </Grid>
-            
 
-        <Grid x:Name="GridMain" Height="469" Background="Aquamarine" ScrollViewer.HorizontalScrollBarVisibility="Visible"
-              IsEnabled="True" Visibility="Visible">
-        <Grid Margin="0,100,0,2">
-            
-            <ListBox x:Name="songList" Margin="10,-90,10,10" BorderThickness="2" HorizontalAlignment="Stretch"
-                     ItemsSource="{Binding SongsList}" SelectedItem="{Binding SelectedSong}"
-                     MouseDoubleClick="PlaylistElement_OnMouseDoubleClick"
-                     
-                      VerticalAlignment="Top" Grid.ColumnSpan="2">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Name}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Grid>
-        </Grid>
-        
+
+
+
     </StackPanel>
 
 
