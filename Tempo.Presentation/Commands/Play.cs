@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Input;
-
 using GalaSoft.MvvmLight.Command;
 using Tempo.Services.AudioPlayer.Commands;
 

@@ -86,6 +86,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\Next.cs" />
+    <Compile Include="Commands\Pause.cs" />
     <Compile Include="Commands\Previous.cs" />
     <Compile Include="Commands\Clear.cs" />
     <Compile Include="Commands\Shuffle.cs" />
