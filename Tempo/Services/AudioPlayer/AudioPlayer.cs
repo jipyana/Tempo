@@ -26,18 +26,26 @@ namespace Tempo.Services.AudioPlayer
 
         public void Play(ent::Song song)
         {
-            song.Should().NotBeNull();
-            this.Stop();
+            if(IsPaused)
+            {
+                waveOut.Resume();
+                IsPaused = false;
+            }
+            else
+            {
+                song.Should().NotBeNull();
+                this.Stop();
 
-            waveOut    = new WaveOut();
-            var mp3FileReader = new Mp3FileReader(song.Uri);
-            waveOut.Init(mp3FileReader);
-            waveOut.Play();
-            waveOut.PlaybackStopped += (sender, args) => OnPlaybackEnded?.Invoke();
+                waveOut    = new WaveOut();
+                var mp3FileReader = new Mp3FileReader(song.Uri);
+                waveOut.Init(mp3FileReader);
+                waveOut.Play();
+                waveOut.PlaybackStopped += (sender, args) => OnPlaybackEnded?.Invoke();
 
-            this.IsPaused    = false;
-            this.IsPlaying   = true;
-            this.PlayingSong = song;
+                this.IsPaused    = false;
+                this.IsPlaying   = true;
+                this.PlayingSong = song;
+            }
         }
 
         public void Pause()
@@ -73,8 +81,6 @@ namespace Tempo.Services.AudioPlayer
             this.IsPlaying   = false;
             this.PlayingSong = null;
         }
-
-        //Add Pause
 
         public void ProcessCommand(IAudioPlayerCommand command)
         {
