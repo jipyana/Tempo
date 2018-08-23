@@ -26,6 +26,16 @@ namespace Tempo.Services.AudioPlayer.Commands
             }
         }
 
+        public class Pause : IAudioPlayerCommand
+        {
+            public void Execute(IAudioPlayer audioPlayer)
+            {
+                audioPlayer.Pause();
+            }
+        }
+
+      
+
         public class Stop : IAudioPlayerCommand
         {
             public void Execute(IAudioPlayer audioPlayer)
