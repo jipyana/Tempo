@@ -71,7 +71,11 @@
                     <TabItem Header="Recently Added" Margin="0,0,-39,-18">
                         <Grid x:Name="GridMain3" Height="512" Background="RosyBrown"
               IsEnabled="True" Visibility="Visible" Margin="0,0,-603,0">
-                            <Grid Margin="0,100,0,2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50*"/>
+                                <ColumnDefinition Width="1211*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Margin="0,100,0,2" Grid.ColumnSpan="2">
 
                             </Grid>
                         </Grid>
@@ -79,8 +83,65 @@
 
                     <TabItem Header="Cloud Library" Margin="47,0,-104,-18">
                         <Grid x:Name="GridMain4" Height="512" Background="RosyBrown"
-              IsEnabled="True" Visibility="Visible" Margin="0,0,-390,0">
+              IsEnabled="True" Visibility="Visible" Margin="0,0,-598,0">
                             <Grid Margin="0,100,0,2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height=".1*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                    <TextBlock Margin="10 0" FontSize="24" VerticalAlignment="Center">Title</TextBlock>
+                                    <TextBox x:Name="titleTextBox" FontSize="24" Width="250"/>
+                                    <TextBlock Margin="10 0" FontSize="24" VerticalAlignment="Center">Artist</TextBlock>
+                                    <TextBox x:Name="artistTextBox" FontSize="24" Width="250"/>
+                                    <TextBlock Margin="10 0" FontSize="24" VerticalAlignment="Center">Genre</TextBlock>
+                                    <TextBox x:Name="genreTextBox" FontSize="24" Width="250"/>
+
+                                    <Button x:Name="searchButton" Click="SearchButton_Click" Margin="10 0">Search</Button>
+                                    <Button x:Name="downloadButton" Click="DownloadButton_Click">Download</Button>
+                                </StackPanel>
+
+                                <FlowDocumentReader Grid.Row="1" Width="1000" HorizontalAlignment="Left" >
+                                    <FlowDocument>
+
+                                        <Table x:Name="cloudLibraryTable" CellSpacing="1">
+
+                                            <Table.Columns>
+                                                <TableColumn/>
+                                                <TableColumn/>
+                                                <TableColumn/>
+                                                <TableColumn/>
+                                            </Table.Columns>
+
+                                            <TableRowGroup>
+
+                                                <!-- Header row for the table. -->
+                                                <TableRow Background="LightGoldenrodYellow">
+                                                    <TableCell>
+                                                        <Paragraph FontSize="12pt" FontWeight="Bold">Title</Paragraph>
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <Paragraph FontSize="12pt" FontWeight="Bold">Artist</Paragraph>
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <Paragraph FontSize="12pt" FontWeight="Bold">Genre</Paragraph>
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <Paragraph FontSize="12pt" FontWeight="Bold">Length</Paragraph>
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <Paragraph FontSize="12pt" FontWeight="Bold">FileSize</Paragraph>
+                                                    </TableCell>
+                                                </TableRow>
+
+                                              
+
+                                            </TableRowGroup>
+                                        </Table>
+                                    </FlowDocument>
+                                </FlowDocumentReader>
+
 
                             </Grid>
                         </Grid>
