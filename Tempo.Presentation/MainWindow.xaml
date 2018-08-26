@@ -4,56 +4,191 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
-        mc:Ignorable="d" 
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    mc:Ignorable="d" 
         x:Class="Tempo.Presentation.MainWindow"
-        Title="Tempo" Height="400" Width="650" 
+        Title="Tempo" Height="600" Width="1080"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowIconOnTitleBar="True" 
         Icon="Assets/Images/MetronomeIcon.png" BorderThickness="0" GlowBrush="Black">
+
+
+
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
             <Button Content="settings" Click="OpenSettingsWindow"/>
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.3*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <StackPanel >
 
-        <Grid Grid.Row="0">
-            <Button fa:Awesome.Content="StepBackward" Command="{Binding PreviousCommand}" HorizontalAlignment="Left" Margin="25,50,0,10" VerticalAlignment="Center" Width="30"
-                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
-            <Button fa:Awesome.Content="Play"  Command="{Binding PlayCommand}" HorizontalAlignment="Left" Margin="60,50,0,10" VerticalAlignment="Center" Width="30"
-                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
-            <Button fa:Awesome.Content="Pause"  Command="{Binding PauseCommand}" HorizontalAlignment="Left" Margin="95,50,0,10" VerticalAlignment="Center" Width="30"
-                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
-            <Button fa:Awesome.Content="Stop" Command="{Binding StopCommand}" HorizontalAlignment="Left" Margin="130,50,0,10" VerticalAlignment="Center" Width="30"
-                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
-            <Button fa:Awesome.Content="StepForward" Command="{Binding NextCommand}" HorizontalAlignment="Left" Margin="165,50,0,10" VerticalAlignment="Center" Width="30"
-                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
-            <Button Content="Import" Command="{Binding ImportCommand}" HorizontalAlignment="Left" Margin="559,50,0,10" VerticalAlignment="Center" Width="75"/>
-            <Button fa:Awesome.Content="Random" Command="{Binding ShuffleCommand}" HorizontalAlignment="Left" Margin="300,50,0,10" VerticalAlignment="Center" Width="30"
-                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
-            <Button Content="{Binding PlaybackLoopText}" Command="{Binding TogglePlaybackLoopCommand}" HorizontalAlignment="Left" Margin="335,50,0,10" VerticalAlignment="Center" Width="87"/>
-            <Button Content="Clear" Command="{Binding ClearCommand}" HorizontalAlignment="Left" Margin="479,50,0,10" VerticalAlignment="Center" Width="75"/>
+        <Grid Height="auto">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10 0">
+                <TabControl>
+                    <TabItem Width="150" Header="Home" Margin="0,0,0,-18">
+                        <Grid x:Name="GridMain" Height="512" Background="RosyBrown"
+              IsEnabled="True" Visibility="Visible" Margin="0,0,-603,0">
+                            <Grid Margin="0,100,0,2">
+                                <!--<Grid Grid.Row="0">-->
 
-            <Label Content="{Binding PlayingSong.Name}" FontSize="20" HorizontalAlignment="Left" Margin="15,6,0,0" VerticalAlignment="Top" />
-        </Grid>
 
-        <Grid Grid.Row="1">
-            <ListBox Margin="8,0,8,10" BorderThickness="0" HorizontalAlignment="Stretch"
+
+                                <ListBox x:Name="songList" Margin="20,-30,20,20"  
+                                          HorizontalAlignment="Stretch"
                      ItemsSource="{Binding SongsList}" SelectedItem="{Binding SelectedSong}"
                      MouseDoubleClick="PlaylistElement_OnMouseDoubleClick"
-                     Height="Auto" VerticalAlignment="Top">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Name}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                     
+                      VerticalAlignment="Top" Grid.ColumnSpan="3">
+                                    <ListBox.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="10"/>
+                                        </Style>
+                                    </ListBox.Resources>
+                                    <ListBox.ItemTemplate>
+
+                                        <DataTemplate>
+                                            <StackPanel>
+
+                                                <TextBlock Text="{Binding Name}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+
+
+                    <TabItem Width="150" Header="My Playlists" Margin="-33,0,33,-18">
+                        <Grid x:Name="GridMain2" Height="512" Background="RosyBrown"
+              IsEnabled="True" Visibility="Visible" Margin="0,0,-603,0">
+                            <Grid Margin="0,100,0,2">
+
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+
+
+                    <TabItem Header="Recently Added" Margin="0,0,-39,-18">
+                        <Grid x:Name="GridMain3" Height="512" Background="RosyBrown"
+              IsEnabled="True" Visibility="Visible" Margin="0,0,-603,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50*"/>
+                                <ColumnDefinition Width="1211*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Margin="0,100,0,2" Grid.ColumnSpan="2">
+
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem Header="Cloud Library" Margin="47,0,-104,-18">
+                        <Grid x:Name="GridMain4" Height="512" Background="RosyBrown"
+              IsEnabled="True" Visibility="Visible" Margin="0,0,-598,0">
+                            <Grid Margin="0,100,0,2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height=".1*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                    <TextBlock Margin="10 0" FontSize="24" VerticalAlignment="Center">Title</TextBlock>
+                                    <TextBox x:Name="titleTextBox" FontSize="24" Width="250"/>
+                                    <TextBlock Margin="10 0" FontSize="24" VerticalAlignment="Center">Artist</TextBlock>
+                                    <TextBox x:Name="artistTextBox" FontSize="24" Width="250"/>
+                                    <TextBlock Margin="10 0" FontSize="24" VerticalAlignment="Center">Genre</TextBlock>
+                                    <TextBox x:Name="genreTextBox" FontSize="24" Width="250"/>
+
+                                    <Button x:Name="searchButton" Click="SearchButton_Click" Margin="10 0">Search</Button>
+                                    <Button x:Name="downloadButton" Click="DownloadButton_Click">Download</Button>
+                                </StackPanel>
+
+                                <FlowDocumentReader Grid.Row="1" Width="1000" HorizontalAlignment="Left" >
+                                    <FlowDocument>
+
+                                        <Table x:Name="cloudLibraryTable" CellSpacing="1">
+
+                                            <Table.Columns>
+                                                <TableColumn/>
+                                                <TableColumn/>
+                                                <TableColumn/>
+                                                <TableColumn/>
+                                            </Table.Columns>
+
+                                            <TableRowGroup>
+
+                                                <!-- Header row for the table. -->
+                                                <TableRow Background="LightGoldenrodYellow">
+                                                    <TableCell>
+                                                        <Paragraph FontSize="12pt" FontWeight="Bold">Title</Paragraph>
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <Paragraph FontSize="12pt" FontWeight="Bold">Artist</Paragraph>
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <Paragraph FontSize="12pt" FontWeight="Bold">Genre</Paragraph>
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <Paragraph FontSize="12pt" FontWeight="Bold">Length</Paragraph>
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <Paragraph FontSize="12pt" FontWeight="Bold">FileSize</Paragraph>
+                                                    </TableCell>
+                                                </TableRow>
+
+                                              
+
+                                            </TableRowGroup>
+                                        </Table>
+                                    </FlowDocument>
+                                </FlowDocumentReader>
+
+
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </StackPanel>
+            <Grid Margin="20,0,0,465">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="211*"/>
+                    <ColumnDefinition Width="96*"/>
+                    <ColumnDefinition Width="226*"/>
+                    <ColumnDefinition Width="541*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button fa:Awesome.Content="StepBackward" Command="{Binding PreviousCommand}" HorizontalAlignment="Left" Margin="25,50,0,10" VerticalAlignment="Center" Width="30"
+                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
+                <Button fa:Awesome.Content="Play"  Command="{Binding PlayCommand}" HorizontalAlignment="Left" Margin="60,50,0,10" VerticalAlignment="Center" Width="30"
+                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
+                <Button fa:Awesome.Content="Pause"  Command="{Binding PauseCommand}" HorizontalAlignment="Left" Margin="95,50,0,10" VerticalAlignment="Center" Width="30"
+                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
+                <Button fa:Awesome.Content="Stop" Command="{Binding StopCommand}" HorizontalAlignment="Left" Margin="130,50,0,10" VerticalAlignment="Center" Width="30"
+                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
+                <Button fa:Awesome.Content="StepForward" Command="{Binding NextCommand}" HorizontalAlignment="Left" Margin="165,50,0,10" VerticalAlignment="Center" Width="30"
+                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
+                <Button Content="Import" Command="{Binding ImportCommand}" HorizontalAlignment="Left" Margin="559,50,0,10" VerticalAlignment="Center" Width="75"/>
+                <Button fa:Awesome.Content="Random" Command="{Binding ShuffleCommand}" HorizontalAlignment="Left" Margin="300,50,0,10" VerticalAlignment="Center" Width="30"
+                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
+                <Button Content="{Binding PlaybackLoopText}" Command="{Binding TogglePlaybackLoopCommand}" HorizontalAlignment="Left" Margin="335,50,0,10" VerticalAlignment="Center" Width="87"/>
+                <Button Content="Clear" Command="{Binding ClearCommand}" HorizontalAlignment="Left" Margin="479,50,0,10" VerticalAlignment="Center" Width="75"/>
+
+
+                <Button Content="Import" Command="{Binding ImportCommand}" HorizontalAlignment="Left" Margin="350,48,0,12" VerticalAlignment="Center" Width="75" Grid.Column="3" Height="25"/>
+                <Button fa:Awesome.Content="Random" Command="{Binding ShuffleCommand}" HorizontalAlignment="Left" Margin="143,48,0,12" VerticalAlignment="Center" Width="30"
+                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome" RenderTransformOrigin="7.233,0.48" Height="25" Grid.Column="2"/>
+                <Button Content="{Binding PlaybackLoopText}" Command="{Binding TogglePlaybackLoopCommand}" HorizontalAlignment="Left" Margin="201,50,0,10" VerticalAlignment="Center" Width="87" Grid.Column="2" Height="25" Grid.ColumnSpan="2"/>
+                <Button Content="Clear" Command="{Binding ClearCommand}" HorizontalAlignment="Left" Margin="250,50,0,10" VerticalAlignment="Center" Width="75" Grid.Column="3" Height="25"/>
+                <Label Content="{Binding PlayingSong.Name}" FontSize="20" HorizontalAlignment="Left" Margin="15,6,0,0" VerticalAlignment="Top" Height="10" Width="10" />
+
+            </Grid>
         </Grid>
-        
-    </Grid>
+
+
+
+
+    </StackPanel>
+
+
+
 </controls:MetroWindow>

@@ -80,6 +80,8 @@ namespace Tempo.Main.Model.Impl
         private class Settings
         {
             public string PlaylistRelativePath => "Playlist.xml";
+
+            //Not sure what this is doing?
             public string PlaylistAbsolutePath => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PlaylistRelativePath);
         }
 
