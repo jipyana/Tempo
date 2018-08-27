@@ -23,11 +23,11 @@
         <Grid Height="auto">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10 0">
                 <TabControl>
-                    <TabItem Width="150" Header="Home" Margin="0,0,0,-2">
+                    <TabItem Width="150" Header="Home" Margin="0,0,0,-18">
                         <Grid x:Name="GridMain" Height="528" Background="RosyBrown"
-              IsEnabled="True" Visibility="Visible" Margin="-20,0,-368,0"
+              IsEnabled="True" Visibility="Visible" Margin="-20,0,-636,0"
                               >
-                            <Grid Margin="0,100,0,2" HorizontalAlignment="Left" Width="1084">
+                            <Grid Margin="0,100,0,2">
                                 <!--<Grid Grid.Row="0">-->
 
 
@@ -84,9 +84,9 @@
                     </TabItem>
 
 
-                    <TabItem Width="150" Header="Recently Added">
+                    <TabItem Width="150" Header="Recently Added" Margin="0,0,0,-18">
                         <Grid x:Name="GridMain3" Height="512" Background="RosyBrown"
-              IsEnabled="True" Visibility="Visible" Margin="-11,0,-454,0">
+              IsEnabled="True" Visibility="Visible" Margin="0,0,-603,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50*"/>
                                 <ColumnDefinition Width="1211*"/>
@@ -98,8 +98,8 @@
                     </TabItem>
 
                     <TabItem Header="Cloud Library" Margin="47,0,-104,-3">
-                        <Grid x:Name="GridMain4" Height="527" Background="RosyBrown"
-              IsEnabled="True" Visibility="Visible" Margin="-14,0,-454,0">
+                        <Grid x:Name="GridMain4" Height="512" Background="RosyBrown"
+              IsEnabled="True" Visibility="Visible" Margin="0,0,-598,0">
                             <Grid Margin="0,70,0,2">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height=".1*"/>
@@ -107,20 +107,20 @@
                                 </Grid.RowDefinitions>
 
                                 <StackPanel Orientation="Horizontal" Grid.Row="0">
-                                    <TextBlock Margin="10,5,10,4" FontSize="24" VerticalAlignment="Center"><Run Text="Title"/></TextBlock>
+                                    <TextBlock Margin="10 0" FontSize="24" VerticalAlignment="Center">Title</TextBlock>
                                     <TextBox x:Name="titleTextBox" FontSize="24" Width="200"/>
-                                    <TextBlock Margin="10 0" FontSize="24" VerticalAlignment="Center"><Run Text="Artist"/></TextBlock>
+                                    <TextBlock Margin="10 0" FontSize="24" VerticalAlignment="Center">Artist</TextBlock>
                                     <TextBox x:Name="artistTextBox" FontSize="24" Width="200"/>
-                                    <TextBlock Margin="10 0" FontSize="24" VerticalAlignment="Center"><Run Text="Genre"/></TextBlock>
+                                    <TextBlock Margin="10 0" FontSize="24" VerticalAlignment="Center">Genre</TextBlock>
                                     <TextBox x:Name="genreTextBox" FontSize="24" Width="200"/>
 
-                                    <Button x:Name="searchButton" Click="SearchButton_Click" Margin="10 0" Content="Search"/>
-                                    <Button x:Name="downloadButton" Click="DownloadButton_Click" Content="Download"/>
-                                    <Button x:Name="uploadButton" Click="UploadButton_Click" Margin="10 0" Content="Upload"/>
+                                    <Button x:Name="searchButton" Click="SearchButton_Click" Margin="10 0">Search</Button>
+                                    <Button x:Name="downloadButton" Click="DownloadButton_Click">Download</Button>
+                                    <Button x:Name="uploadButton" Click="UploadButton_Click" Margin="10 0">Upload</Button>
                                 </StackPanel>
 
                                 <FlowDocumentReader x:Name="cloudLibraryDocReader" Grid.Row="1" Width="1000" HorizontalAlignment="Left" 
-                                                    ViewingMode="Scroll" Margin="44,10,0,10" >
+                                                    ViewingMode="Scroll" >
                                     <FlowDocument>
 
                                         <Table x:Name="cloudLibraryTable" CellSpacing="1">
@@ -172,7 +172,7 @@
                                     </Grid.RowDefinitions>
 
                                     <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,10">
-                                        <TextBlock Margin="10,0" FontSize="24" VerticalAlignment="Center">mp3 FilePath:</TextBlock>
+                                        <TextBlock Margin="10,0" FontSize="24" VerticalAlignment="Center">mp3 FilePath: </TextBlock>
                                         <TextBox x:Name="filePathUploadTextBox" FontSize="24" Width="750" IsEnabled="False"></TextBox>
                                         <Button x:Name="mp3FileBrowseButton" FontSize="24" Margin="10, 0">Browse</Button>
                                     </StackPanel>
