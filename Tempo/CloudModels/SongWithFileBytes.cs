@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tempo.CloudModels
 {
-    class SongWithFileBytes
+    public class SongWithFileBytes
     {
         public Song song;
 

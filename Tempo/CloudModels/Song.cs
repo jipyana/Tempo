@@ -6,25 +6,25 @@ using System.Threading.Tasks;
 
 namespace Tempo.CloudModels
 {
-    class Song
+    public class Song
     {
-        private int id;
+        public int id;
 
-        private String title;
+        public String title;
 
-        private String artist;
+        public String artist;
 
-        private String genre;
+        public String genre;
 
-        private String filePath;
+        public String filePath;
 
-        private int hours;
+        public int hours;
 
-        private int minutes;
+        public int minutes;
 
-        private int seconds;
+        public int seconds;
 
-        private int fileSize;
+        public int fileSize;
 
         public Song()
         {

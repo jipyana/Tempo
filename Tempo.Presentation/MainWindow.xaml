@@ -23,7 +23,7 @@
         <Grid Height="auto">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10 0">
                 <TabControl>
-                    <TabItem Width="150" Header="Home" Margin="0,0,0,-18">
+                    <TabItem Width="150" Header="Home" Margin="0,0,0,-4">
                         <Grid x:Name="GridMain" Height="512" Background="RosyBrown"
               IsEnabled="True" Visibility="Visible" Margin="0,0,-603,0">
                             <Grid Margin="0,100,0,2">
@@ -58,7 +58,7 @@
                     </TabItem>
 
 
-                    <TabItem Width="150" Header="My Playlists" Margin="-33,0,33,-18">
+                    <TabItem Width="150" Header="My Playlists" Margin="-33,0,33,-4">
                         <Grid x:Name="GridMain2" Height="512" Background="RosyBrown"
               IsEnabled="True" Visibility="Visible" Margin="0,0,-603,0">
                             <Grid Margin="0,100,0,2">
@@ -68,7 +68,7 @@
                     </TabItem>
 
 
-                    <TabItem Header="Recently Added" Margin="0,0,-39,-18">
+                    <TabItem Header="Recently Added" Margin="0,0,-39,-3">
                         <Grid x:Name="GridMain3" Height="512" Background="RosyBrown"
               IsEnabled="True" Visibility="Visible" Margin="0,0,-603,0">
                             <Grid.ColumnDefinitions>
@@ -81,7 +81,7 @@
                         </Grid>
                     </TabItem>
 
-                    <TabItem Header="Cloud Library" Margin="47,0,-104,-18">
+                    <TabItem Header="Cloud Library" Margin="47,0,-104,-3">
                         <Grid x:Name="GridMain4" Height="512" Background="RosyBrown"
               IsEnabled="True" Visibility="Visible" Margin="0,0,-598,0">
                             <Grid Margin="0,100,0,2">
@@ -92,11 +92,11 @@
 
                                 <StackPanel Orientation="Horizontal" Grid.Row="0">
                                     <TextBlock Margin="10 0" FontSize="24" VerticalAlignment="Center">Title</TextBlock>
-                                    <TextBox x:Name="titleTextBox" FontSize="24" Width="250"/>
+                                    <TextBox x:Name="titleTextBox" FontSize="24" Width="200"/>
                                     <TextBlock Margin="10 0" FontSize="24" VerticalAlignment="Center">Artist</TextBlock>
-                                    <TextBox x:Name="artistTextBox" FontSize="24" Width="250"/>
+                                    <TextBox x:Name="artistTextBox" FontSize="24" Width="200"/>
                                     <TextBlock Margin="10 0" FontSize="24" VerticalAlignment="Center">Genre</TextBlock>
-                                    <TextBox x:Name="genreTextBox" FontSize="24" Width="250"/>
+                                    <TextBox x:Name="genreTextBox" FontSize="24" Width="200"/>
 
                                     <Button x:Name="searchButton" Click="SearchButton_Click" Margin="10 0">Search</Button>
                                     <Button x:Name="downloadButton" Click="DownloadButton_Click">Download</Button>
