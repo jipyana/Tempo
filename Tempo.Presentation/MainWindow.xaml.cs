@@ -34,7 +34,7 @@ namespace Tempo.Presentation
             timer.Interval = TimeSpan.FromSeconds(1);
             //timer.Tick += timer_Tick;
             timer.Start();
-            SearchButton_Click(null, null);
+            SetSongsToTable(GetAllSongsFromCloudLibrary());
 
         }
 
@@ -60,7 +60,7 @@ namespace Tempo.Presentation
 
         private void sliProgress_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            lblProgressStatus.Text = TimeSpan.FromSeconds(sliProgress.Value).ToString(@"hh\:mm\:ss");
+            //lblProgressStatus.Text = TimeSpan.FromSeconds(sliProgress.Value).ToString(@"hh\:mm\:ss");
         }
 
         //private void Grid_MouseWheel(object sender, MouseWheelEventArgs e)
@@ -99,7 +99,6 @@ namespace Tempo.Presentation
         // kaden.ghostsofutah.com:9578/music/help
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            ClearCloudTable();
             String title = titleTextBox.Text;
             String artist = artistTextBox.Text;
             String genre = genreTextBox.Text;
@@ -126,6 +125,16 @@ namespace Tempo.Presentation
             // Convert JSON into ArrayList<Song>        
             List<Song> songs = ConvertSongsFromJSON(json);
 
+            SetSongsToTable(songs);
+            
+            // Put all of them into table
+
+
+        }
+
+        public void SetSongsToTable(List<Song> songs)
+        {
+            ClearCloudTable();
             foreach (Song s in songs)
             {
                 TableRow tableRow = new TableRow();
@@ -137,9 +146,31 @@ namespace Tempo.Presentation
                 tableRow.Cells.Add(new TableCell(new Paragraph(new Run("" + (double)(s.getFileSize() / 1000.0) + "mb"))));
                 cloudLibraryTable.RowGroups[0].Rows.Add(tableRow);
             }
-            // Put all of them into table
+        }
+
+        private List<Song> GetAllSongsFromCloudLibrary()
+        {
+            string json = string.Empty;
+            string httpRequestString = "http://kaden.ghostsofutah.com:9578/music/getAllSongs";
+            // "http://10.0.0.130:9578/music/getAllSongs"; 
 
 
+            Console.WriteLine(httpRequestString);
+            //HTTP request with search parameters
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(httpRequestString);
+            request.AutomaticDecompression = DecompressionMethods.GZip;
+
+            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+            using (Stream stream = response.GetResponseStream())
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                json = reader.ReadToEnd();
+            }
+
+            //json = json.Replace("\"", "");
+
+            // Convert JSON into ArrayList<Song>        
+            return ConvertSongsFromJSON(json);
         }
 
         private List<Song> ConvertSongsFromJSON(string json)
