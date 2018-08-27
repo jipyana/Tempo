@@ -26,6 +26,8 @@ namespace Tempo.Presentation
             vm = new ViewModel.MainWindowViewModel();
             this.DataContext = vm;
 
+            SearchButton_Click(null, null);
+
             // HTTP request first 100 songs
 
         }
@@ -50,17 +52,26 @@ namespace Tempo.Presentation
 
         }
 
+        private void ClearCloudTable()
+        {
+            while(cloudLibraryTable.RowGroups[0].Rows.Count > 1)
+            {
+                cloudLibraryTable.RowGroups[0].Rows.RemoveAt(1);
+            }
+        }
+
         // kaden.ghostsofutah.com:9578/music/help
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
+            ClearCloudTable();
             String title = titleTextBox.Text;
             String artist = artistTextBox.Text;
             String genre = genreTextBox.Text;
 
             string json = string.Empty;
-            string httpRequestString = $"http://10.0.0.130:9578/music/getSongs/title={title}&artist={artist}&genre={genre}";
-            
-            // $"http://kaden.ghostsofutah.com:9578/music/getSongs/title={title}&artist={artist}&genre={genre}";
+            string httpRequestString = $"http://kaden.ghostsofutah.com:9578/music/getSongs/title={title}&artist={artist}&genre={genre}";
+            // $"http://10.0.0.130:9578/music/getSongs/title={title}&artist={artist}&genre={genre}"; 
+
 
             Console.WriteLine(httpRequestString);
             //HTTP request with search parameters
@@ -82,6 +93,7 @@ namespace Tempo.Presentation
             foreach (Song s in songs)
             {
                 TableRow tableRow = new TableRow();
+                tableRow.Cells.Add(new TableCell());
                 tableRow.Cells.Add(new TableCell(new Paragraph(new Run(s.getTitle()))));
                 tableRow.Cells.Add(new TableCell(new Paragraph(new Run(s.getArtist()))));
                 tableRow.Cells.Add(new TableCell(new Paragraph(new Run(s.getGenre()))));
@@ -99,7 +111,24 @@ namespace Tempo.Presentation
             return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Song>>(json);
         }
 
-        private void UploadButton_Click(object sender, RoutedEventArgs e)
+        public void UploadButton_Click(object sender, RoutedEventArgs e)
+        {
+            cloudLibraryDocReader.Visibility = Visibility.Collapsed;
+            UploadFormGrid.Visibility = Visibility.Visible;
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            filePathUploadTextBox.Text = "";
+            titleUploadTextBox.Text = "";
+            artistUploadTextBox.Text = "";
+            genreUploadTextBox.Text = "";
+
+            cloudLibraryDocReader.Visibility = Visibility.Visible;
+            UploadFormGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
             //cloudLibraryTable.Focus = Visibility.Hidden;
             //uploadGrid.Focus = Visibility.Visible;
@@ -108,31 +137,50 @@ namespace Tempo.Presentation
             //First have user select mp3 file
             //Get the song detail strings from pop up window
 
-            string filePath = "";//filePathUploadTextBox.Text;
-            string title = "";//titleUploadTextBox.Text;
-            string artist = "";//artistUploadTextBox.Text;
-            string genre = "";//genreUploadTextBox.Text;
-            int hours = 0;// Make some kinda time entry thing for the file
-            int minutes = 0;
-            int seconds = 0;
-            //get filesize from file
-            int fileSize = 0; //file.getBytes.Length / 1000;
-            Song s = new Song();
-            //File file = new File(filePath);
+            string filePath = filePathUploadTextBox.Text;
+            if(filePath == "" || filePath == null || filePath.Split('.')[filePath.Split('.').Length - 1] != "mp3")
+            {
+                MessageBox.Show("That is an invalid File please choose an mp3 file before submitting");
+            }
+            else
+            {
+                string title = titleUploadTextBox.Text;
+                string artist = artistUploadTextBox.Text;
+                string genre = genreUploadTextBox.Text;
+                int hours = 0;// Make some kinda time entry thing for the file
+                int minutes = 0;
+                int seconds = 0;
 
-            s.title = title;
-            s.artist = artist;
-            s.genre = genre;
-            s.hours = hours;
-            s.minutes = minutes;
-            s.seconds = seconds;
-            s.fileSize = fileSize;
-            //SongWithFileBytes songWithFile = new SongWithFileBytes(s, file.getBytes);
+                if(File.Exists(filePath))
+                {
+                    byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
+                    //get filesize from file
+                    int fileSize = fileBytes.Length / 1000;
+                    Song s = new Song();
 
-            //convert songWithFile to json
-            //send songWithFile to:
-            //  http://kaden.ghostsofutah.com:9578/music/
-            //  with a post request and the json in the body
+                    s.title = title;
+                    s.artist = artist;
+                    s.genre = genre;
+                    s.hours = hours;
+                    s.minutes = minutes;
+                    s.seconds = seconds;
+                    s.fileSize = fileSize;
+                    SongWithFileBytes songWithFile = new SongWithFileBytes(s, fileBytes);
+
+                    string songWithFileJson = Newtonsoft.Json.JsonConvert.SerializeObject(songWithFile);
+
+                    //convert songWithFile to json
+                    //send songWithFile to:
+                    //  http://kaden.ghostsofutah.com:9578/music/
+                    //  with a post request and the json in the body
+                    CancelButton_Click(null, null);
+                }
+                else
+                {
+                    MessageBox.Show("The specified File does not exist");
+                }
+                
+            }
 
         }
 
