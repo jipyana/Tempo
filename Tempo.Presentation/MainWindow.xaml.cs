@@ -147,6 +147,11 @@ namespace Tempo.Presentation
             return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Song>>(json);
         }
 
+        private void addPlaylist_Click(object sender, RoutedEventArgs e)
+        {
+            AddPlaylist k = new AddPlaylist();
+            k.Show();
+        }
         public void UploadButton_Click(object sender, RoutedEventArgs e)
         {
             cloudLibraryDocReader.Visibility = Visibility.Collapsed;
