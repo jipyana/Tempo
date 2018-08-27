@@ -10,7 +10,6 @@ using System.Windows.Threading;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
 using Tempo.CloudModels;
-using Tempo.Presentation.UserControls;
 using Tempo.Presentation.ViewModel;
 using System.Windows.Documents;
 using System.Net;
@@ -51,6 +50,10 @@ namespace Tempo.Presentation
         {
             userIsDraggingSlider = true;
         }
+        private void PlaylistElement_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            vm.PlayCommand.Execute(null);
+        }
 
         //private void sliProgress_DragCompleted(object sender, DragCompletedEventArgs e)
         //{
@@ -69,10 +72,7 @@ namespace Tempo.Presentation
         //}
         private readonly ViewModel.MainWindowViewModel vm;
 
-        private void PlaylistElement_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            vm.PlayCommand.Execute(null);
-        }
+        
 
         private void OpenSettingsWindow(object sender, RoutedEventArgs e)
         {
@@ -87,6 +87,7 @@ namespace Tempo.Presentation
         {
 
         }
+
 
         private void ClearCloudTable()
         {
@@ -261,7 +262,7 @@ namespace Tempo.Presentation
 
         }
 
-
+    
 
         //private void GridMain_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         //{

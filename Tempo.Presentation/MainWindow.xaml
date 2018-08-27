@@ -7,7 +7,7 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     mc:Ignorable="d" 
         x:Class="Tempo.Presentation.MainWindow"
-        Title="Tempo" Height="600" Width="1080"
+        Title="Tempo" Height="594" Width="1080"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowIconOnTitleBar="True" 
         Icon="Assets/Images/MetronomeIcon.png" BorderThickness="0" GlowBrush="Black">
 
@@ -20,22 +20,26 @@
     </controls:MetroWindow.RightWindowCommands>
     <StackPanel >
 
-        <Grid Height="auto">
+        <Grid Height="571">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10 0">
                 <TabControl>
                     <TabItem Width="150" Header="Home" Margin="0,0,0,-2">
-                        <Grid x:Name="GridMain" Height="528" Background="RosyBrown"
+                        <Grid x:Name="GridMain" Height="528" Background="SteelBlue"
               IsEnabled="True" Visibility="Visible" Margin="-20,0,-368,0"
                               >
-                            <Grid Margin="0,100,0,2" HorizontalAlignment="Left" Width="1084">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="54*"/>
+                                <ColumnDefinition Width="101*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Margin="0,100,0,2" HorizontalAlignment="Left" Width="1084" Grid.ColumnSpan="2">
                                 <!--<Grid Grid.Row="0">-->
 
 
 
-                                <ListBox x:Name="songList" BorderBrush="AntiqueWhite" BorderThickness="2" Margin="62,0,64,15"  
+                                <ListBox x:Name="songList" BorderBrush="AntiqueWhite" BorderThickness="2" Margin="56,0,70,422"  
                                           HorizontalAlignment="Stretch"
-                     ItemsSource="{Binding SongsList}" SelectedItem="{Binding SelectedSong}"
-                      VerticalAlignment="Top">
+                                          MouseDoubleClick="PlaylistElement_OnMouseDoubleClick"
+                     ItemsSource="{Binding SongsList}" SelectedItem="{Binding SelectedSong}">
                                     <ListBox.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="10"/>
@@ -57,14 +61,14 @@
                     </TabItem>
 
 
-                    <TabItem Width="150" Header="My Playlists" Margin="-33,0,33,-3">
-                        <Grid x:Name="GridMain2" Height="512" Background="RosyBrown"
-              IsEnabled="True" Visibility="Visible" Margin="0,0,-452,0">
+                    <TabItem Width="150" Header="My Playlists" Margin="-33,0,33,-2">
+                        <Grid x:Name="GridMain2" Height="529" Background="SteelBlue"
+              IsEnabled="True" Visibility="Visible" Margin="-12,0,-452,0">
 
-                            <Button x:Name="addPlaylist" Click="addPlaylist_Click" RenderTransformOrigin="-4.01,-2.238" Content="Add Playlist" Margin="62,100,824,369"/>
-                            
+                            <Button x:Name="addPlaylist" Click="addPlaylist_Click" RenderTransformOrigin="-4.01,-2.238" Content="Add Playlist" Margin="46,100,840,388"/>
+
                             <Grid Margin="0,100,0,2">
-                                <ListBox x:Name="myPlaylist" Margin="16,56,20,18" RenderTransformOrigin="0.5,0.5" >
+                                <ListBox x:Name="myPlaylist" Margin="25,56,11,366" RenderTransformOrigin="0.5,0.5" >
                                     <ListBox.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="10"/>
@@ -85,8 +89,8 @@
 
 
                     <TabItem Width="150" Header="Recently Added">
-                        <Grid x:Name="GridMain3" Height="512" Background="RosyBrown"
-              IsEnabled="True" Visibility="Visible" Margin="-11,0,-454,0">
+                        <Grid x:Name="GridMain3" Height="530" Background="SteelBlue"
+              IsEnabled="True" Visibility="Visible" Margin="-13,0,-454,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50*"/>
                                 <ColumnDefinition Width="1211*"/>
@@ -98,7 +102,7 @@
                     </TabItem>
 
                     <TabItem Header="Cloud Library" Margin="47,0,-104,-3">
-                        <Grid x:Name="GridMain4" Height="527" Background="RosyBrown"
+                        <Grid x:Name="GridMain4" Height="527" Background="SteelBlue"
               IsEnabled="True" Visibility="Visible" Margin="-14,0,-454,0">
                             <Grid Margin="0,70,0,2">
                                 <Grid.RowDefinitions>
@@ -198,7 +202,7 @@
                 </TabControl>
             </StackPanel>
 
-            <Grid Margin="31,52,-94,420">
+            <Grid Margin="10,49,0,423">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"></RowDefinition>
                     <RowDefinition Height="40"></RowDefinition>
@@ -213,25 +217,25 @@
 
                 <TextBlock Name="lblProgressStatus" Grid.Row="0" Margin="43,18,78,0">00:00:00</TextBlock>
                 <Slider Name="sliProgress" Margin="113,18,318,0" Grid.Row="0" Grid.ColumnSpan="4" />
-                <ProgressBar Name="pbVolume" Height="Auto" Maximum="1" RenderTransformOrigin="1.104,0.357" Grid.Row="0" Grid.Column="3" Margin="278,24,133,10"/>
+                <ProgressBar Name="pbVolume" Height="Auto" Maximum="1" RenderTransformOrigin="1.104,0.357" Grid.Row="0" Grid.Column="3" Margin="278,27,90,6"/>
 
-                <Button fa:Awesome.Content="StepBackward" Command="{Binding PreviousCommand}" Grid.Row="1" HorizontalAlignment="Left" Margin="43,2,0,14" VerticalAlignment="Center" Width="30"
-                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome" RenderTransformOrigin="0.433,7.06" Height="24"/>
-                <Button fa:Awesome.Content="Play"  Command="{Binding PlayCommand}" HorizontalAlignment="Left" Margin="78,2,0,14" VerticalAlignment="Center" Width="30"
-                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome" Grid.Row="1" Height="24"/>
-                <Button fa:Awesome.Content="Pause"  Command="{Binding PauseCommand}" HorizontalAlignment="Left" Margin="113,2,0,14" VerticalAlignment="Center" Width="30"
-                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome" Grid.Row="1" Height="24"/>
-                <Button fa:Awesome.Content="Stop" Command="{Binding StopCommand}" HorizontalAlignment="Left" Margin="148,2,0,14" VerticalAlignment="Center" Width="30"
-                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome" Grid.Row="1" Height="24"/>
-                <Button fa:Awesome.Content="StepForward" Command="{Binding NextCommand}" HorizontalAlignment="Left" Margin="183,2,0,14" VerticalAlignment="Center" Width="30"
-                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome" Grid.Row="1" Height="24"/>
-                <Button fa:Awesome.Content="Random" Command="{Binding ShuffleCommand}" HorizontalAlignment="Left" Margin="96,0,0,16" VerticalAlignment="Center" Width="30"
-                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome" RenderTransformOrigin="-6.3,1.16" Grid.Row="1" Grid.Column="2" Height="24"/>
+                <Button fa:Awesome.Content="StepBackward" Command="{Binding PreviousCommand}" Grid.Row="1" HorizontalAlignment="Left" Margin="43,2,0,10" VerticalAlignment="Center" Width="30"
+                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome" RenderTransformOrigin="0.433,7.06" Height="28"/>
+                <Button fa:Awesome.Content="Play"  Command="{Binding PlayCommand}" HorizontalAlignment="Left" Margin="78,2,0,10" VerticalAlignment="Center" Width="30"
+                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome" Grid.Row="1" Height="28"/>
+                <Button fa:Awesome.Content="Pause"  Command="{Binding PauseCommand}" HorizontalAlignment="Left" Margin="113,2,0,10" VerticalAlignment="Center" Width="30"
+                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome" Grid.Row="1" Height="28"/>
+                <Button fa:Awesome.Content="Stop" Command="{Binding StopCommand}" HorizontalAlignment="Left" Margin="148,2,0,10" VerticalAlignment="Center" Width="30"
+                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome" Grid.Row="1" Height="28"/>
+                <Button fa:Awesome.Content="StepForward" Command="{Binding NextCommand}" HorizontalAlignment="Left" Margin="183,2,0,10" VerticalAlignment="Center" Width="32"
+                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome" Grid.Row="1" Height="28" Grid.ColumnSpan="2"/>
+                <Button fa:Awesome.Content="Random" Command="{Binding ShuffleCommand}" HorizontalAlignment="Left" Margin="96,0,0,10" VerticalAlignment="Center" Width="30"
+                    TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome" RenderTransformOrigin="-6.3,1.16" Grid.Row="1" Grid.Column="2" Height="30"/>
 
 
-                <Button Content="Import" Command="{Binding ImportCommand}" HorizontalAlignment="Left" Margin="367,0,0,16" VerticalAlignment="Center" Width="75" Grid.Column="3" Height="24" RenderTransformOrigin="0.653,-1.08" Grid.Row="1"/>
-                <Button Content="{Binding PlaybackLoopText}" Command="{Binding TogglePlaybackLoopCommand}" HorizontalAlignment="Left" Margin="26,0,0,16" VerticalAlignment="Center" Width="87" Grid.Column="3" Height="24" Grid.Row="1"/>
-                <Button Content="Clear" Command="{Binding ClearCommand}" HorizontalAlignment="Left" Margin="278,0,0,16" VerticalAlignment="Center" Width="75" Grid.Column="3" Height="24" Grid.Row="1"/>
+                <Button Content="Import" Command="{Binding ImportCommand}" HorizontalAlignment="Left" Margin="373,2,0,8" VerticalAlignment="Center" Width="75" Grid.Column="3" Height="30" RenderTransformOrigin="0.653,-1.08" Grid.Row="1"/>
+                <Button Content="{Binding PlaybackLoopText}" Command="{Binding TogglePlaybackLoopCommand}" HorizontalAlignment="Left" Margin="26,0,0,10" VerticalAlignment="Center" Width="87" Grid.Column="3" Height="30" Grid.Row="1"/>
+                <Button Content="Clear" Command="{Binding ClearCommand}" HorizontalAlignment="Left" Margin="278,0,0,10" VerticalAlignment="Center" Width="75" Grid.Column="3" Height="30" Grid.Row="1"/>
                 <Label Content="{Binding PlayingSong.Name}" FontSize="20" HorizontalAlignment="Left" Margin="15,6,0,0" VerticalAlignment="Top" Height="10" Width="10" />
             </Grid>
         </Grid>

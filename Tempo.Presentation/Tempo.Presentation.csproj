@@ -107,17 +107,14 @@
     <Compile Include="Commands\TogglePlaybackLoop.cs" />
     <Compile Include="Commands\Stop.cs" />
     <Compile Include="Commands\Play.cs" />
-    <Compile Include="AddPlaylist.xaml.cs">
-      <DependentUpon>AddPlaylist.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\MyPlaylists.xaml.cs">
-      <DependentUpon>MyPlaylists.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="AddPlaylist.xaml.cs">
+      <DependentUpon>AddPlaylist.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -131,15 +128,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="AddPlaylist.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\MyPlaylists.xaml">
+    <Page Include="AddPlaylist.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
