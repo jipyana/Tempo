@@ -152,6 +152,11 @@ namespace Tempo.Presentation
             cloudLibraryDocReader.Visibility = Visibility.Collapsed;
             UploadFormGrid.Visibility = Visibility.Visible;
         }
+        private void addPlaylist_Click(object sender, RoutedEventArgs e)
+        {
+            AddPlaylist k = new AddPlaylist();
+            k.Show();
+        }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {

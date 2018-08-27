@@ -35,8 +35,6 @@
                                 <ListBox x:Name="songList" BorderBrush="AntiqueWhite" BorderThickness="2" Margin="62,0,64,15"  
                                           HorizontalAlignment="Stretch"
                      ItemsSource="{Binding SongsList}" SelectedItem="{Binding SelectedSong}"
-                     MouseDoubleClick="PlaylistElement_OnMouseDoubleClick"
-                     
                       VerticalAlignment="Top">
                                     <ListBox.Resources>
                                         <Style TargetType="Border">
@@ -59,11 +57,28 @@
                     </TabItem>
 
 
-                    <TabItem Width="150" Header="My Playlists" Margin="-33,0,33,-3">
-                        <Grid x:Name="GridMain2" Height="530" Background="RosyBrown"
-              IsEnabled="True" Visibility="Visible" Margin="-15,0,-447,0">
-                            <Grid Margin="0,100,0,2">
+                    <TabItem Width="150" Header="My Playlists" Margin="-33,0,33,-18">
+                        <Grid x:Name="GridMain2" Height="512" Background="RosyBrown"
+              IsEnabled="True" Visibility="Visible" Margin="0,0,-452,0">
 
+                            <Button x:Name="addPlaylist" Click="addPlaylist_Click" RenderTransformOrigin="-4.01,-2.238" Content="Add Playlist" Margin="62,100,824,369"/>
+                            
+                            <Grid Margin="0,100,0,2">
+                                <ListBox x:Name="myPlaylist" Margin="16,56,20,18" RenderTransformOrigin="0.5,0.5" >
+                                    <ListBox.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="10"/>
+                                        </Style>
+                                    </ListBox.Resources>
+                                    <ListBox.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform AngleY="-0.349"/>
+                                            <RotateTransform/>
+                                            <TranslateTransform Y="-2.994"/>
+                                        </TransformGroup>
+                                    </ListBox.RenderTransform>
+                                </ListBox>
                             </Grid>
                         </Grid>
                     </TabItem>
