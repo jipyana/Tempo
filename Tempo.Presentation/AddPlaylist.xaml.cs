@@ -10,14 +10,15 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Tempo.Presentation
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for Page1.xaml
     /// </summary>
-    public partial class AddPlaylist: Window
+    public partial class AddPlaylist : Window
     {
         public AddPlaylist()
         {
