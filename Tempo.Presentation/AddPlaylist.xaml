@@ -21,14 +21,24 @@
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
             </ListBox.Resources>
+            
 
         </ListBox>
-        <ListBox Grid.Column="1" Margin="49,55,10,71" Background="Beige">
+        <ListBox Grid.Column="1" Margin="49,55,10,71" Background="Beige" ItemsSource="{Binding ConvertSongsFromJSON}">
             <ListBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
             </ListBox.Resources>
+            <ListBox.ItemTemplate>
+
+                <DataTemplate>
+                    <StackPanel>
+
+                        <TextBlock Text="{Binding ConvertSongsFromJSON}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
         <Button x:Name="Complete" Margin="159,461,37,19" Grid.Column="0" Content="Complete"/>
         <Button x:Name="AddSong" Grid.Column="1" Margin="49,463,174,19" Content="Add Song"/>
