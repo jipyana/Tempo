@@ -14,6 +14,8 @@ using Tempo.Presentation.ViewModel;
 using System.Windows.Documents;
 using System.Net;
 using System.IO;
+using System.Net.Http;
+using Microsoft.Win32;
 
 namespace Tempo.Presentation
 {
@@ -21,6 +23,7 @@ namespace Tempo.Presentation
     {
         private bool mediaPlayerIsPlaying = false;
         private bool userIsDraggingSlider = false;
+        private readonly ViewModel.MainWindowViewModel vm;
 
         public MainWindow()
         {
@@ -66,7 +69,6 @@ namespace Tempo.Presentation
         //{
         //    GridMain.Volume += (e.Delta > 0) ? 0.1 : -0.1;
         //}
-        private readonly ViewModel.MainWindowViewModel vm;
 
         private void PlaylistElement_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -123,9 +125,9 @@ namespace Tempo.Presentation
             //json = json.Replace("\"", "");
 
             // Convert JSON into ArrayList<Song>        
-            List<Tempo.CloudModels.Song> songs = ConvertSongsFromJSON(json);
+            List<Tempo.CloudModels.Song> cloudSongs = ConvertSongsFromJSON(json);
 
-            SetSongsToTable(songs);
+            SetSongsToTable(cloudSongs);
             
             // Put all of them into table
 
@@ -196,7 +198,7 @@ namespace Tempo.Presentation
             UploadFormGrid.Visibility = Visibility.Collapsed;
         }
 
-        private void SubmitButton_Click(object sender, RoutedEventArgs e)
+        private async void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
             //cloudLibraryTable.Focus = Visibility.Hidden;
             //uploadGrid.Focus = Visibility.Visible;
@@ -242,6 +244,12 @@ namespace Tempo.Presentation
                     //  http://kaden.ghostsofutah.com:9578/music/
                     //  with a post request and the json in the body
 
+                    var httpClient = new HttpClient();
+                    var response = await httpClient.PostAsync("http://kaden.ghostsofutah.com:9578/music/upload", new StringContent(songWithFileJson, System.Text.Encoding.UTF8, "application/json"));
+
+                    response.EnsureSuccessStatusCode();
+
+
                     CancelButton_Click(null, null);
                 }
                 else
@@ -251,6 +259,16 @@ namespace Tempo.Presentation
                 
             }
 
+        }
+
+        private void mp3FileBrowseButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog f = new OpenFileDialog();
+            f.Filter = "MP3 files (*.mp3)|*.mp3";
+            if(f.ShowDialog() == true)
+            {
+                filePathUploadTextBox.Text = f.FileName;
+            }
         }
 
 
