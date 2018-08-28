@@ -162,7 +162,7 @@
                                     <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,10">
                                         <TextBlock Margin="10,0" FontSize="24" VerticalAlignment="Center">mp3 FilePath:</TextBlock>
                                         <TextBox x:Name="filePathUploadTextBox" FontSize="24" Width="750" IsEnabled="False"></TextBox>
-                                        <Button x:Name="mp3FileBrowseButton" Click="mp3FileBrowseButton_Click" FontSize="24" Margin="10, 0">Browse</Button>
+                                        <Button x:Name="mp3FileBrowseButton" FontSize="24" Margin="10, 0">Browse</Button>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,10">
                                         <TextBlock Margin="100,0,10,0" FontSize="24" VerticalAlignment="Center">Title:</TextBlock>

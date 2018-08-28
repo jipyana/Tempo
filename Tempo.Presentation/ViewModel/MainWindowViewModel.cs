@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Input;
 using Tempo.Main.Model;
 using Tempo.Main.Model.Impl;
 using Tempo.Services.AudioPlayer;
@@ -20,9 +19,7 @@ namespace Tempo.Presentation.ViewModel
         public ent::Song SelectedSong
         {
             get { return (ent::Song) GetValue(SelectedSongProperty); }
-            set {
-                SetValue(SelectedSongProperty, value);
-            }
+            set { SetValue(SelectedSongProperty, value); }
         }
         public static readonly DependencyProperty SelectedSongProperty = DependencyProperty.Register("SelectedSong", typeof (ent::Song), typeof (MainWindowViewModel), new PropertyMetadata());
 

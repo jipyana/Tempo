@@ -26,7 +26,7 @@ namespace Tempo.Services.AudioPlayer
 
         public void Play(ent::Song song)
         {
-            if(IsPaused && IsPlaying)
+            if(IsPaused)
             {
                 waveOut.Resume();
                 IsPaused = false;

@@ -9,13 +9,12 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
+using Tempo.CloudModels;
 using Tempo.Presentation.UserControls;
 using Tempo.Presentation.ViewModel;
 using System.Windows.Documents;
 using System.Net;
 using System.IO;
-using System.Net.Http;
-using Microsoft.Win32;
 
 namespace Tempo.Presentation
 {
@@ -23,7 +22,6 @@ namespace Tempo.Presentation
     {
         private bool mediaPlayerIsPlaying = false;
         private bool userIsDraggingSlider = false;
-        private readonly ViewModel.MainWindowViewModel vm;
 
         public MainWindow()
         {
@@ -69,6 +67,7 @@ namespace Tempo.Presentation
         //{
         //    GridMain.Volume += (e.Delta > 0) ? 0.1 : -0.1;
         //}
+        private readonly ViewModel.MainWindowViewModel vm;
 
         private void PlaylistElement_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -109,8 +108,7 @@ namespace Tempo.Presentation
 
             string json = string.Empty;
             string httpRequestString = $"http://kaden.ghostsofutah.com:9578/music/getSongs/title={title}&artist={artist}&genre={genre}";
-                                       // $"http://10.0.0.130:9578/music/getSongs/title={title}&artist={artist}&genre={genre}";
-
+            // $"http://10.0.0.130:9578/music/getSongs/title={title}&artist={artist}&genre={genre}"; 
 
 
             Console.WriteLine(httpRequestString);
@@ -128,19 +126,19 @@ namespace Tempo.Presentation
             //json = json.Replace("\"", "");
 
             // Convert JSON into ArrayList<Song>        
-            List<Tempo.CloudModels.Song> cloudSongs = ConvertSongsFromJSON(json);
+            List<Song> songs = ConvertSongsFromJSON(json);
 
-            SetSongsToTable(cloudSongs);
+            SetSongsToTable(songs);
             
             // Put all of them into table
 
 
         }
 
-        public void SetSongsToTable(List<Tempo.CloudModels.Song> songs)
+        public void SetSongsToTable(List<Song> songs)
         {
             ClearCloudTable();
-            foreach (Tempo.CloudModels.Song s in songs)
+            foreach (Song s in songs)
             {
                 TableRow tableRow = new TableRow();
                 tableRow.Cells.Add(new TableCell());
@@ -153,12 +151,11 @@ namespace Tempo.Presentation
             }
         }
 
-        private List<Tempo.CloudModels.Song> GetAllSongsFromCloudLibrary()
+        private List<Song> GetAllSongsFromCloudLibrary()
         {
             string json = string.Empty;
-            string httpRequestString = "http://kaden.ghostsofutah.com:9578/music/getAllSongs"; 
-                                       // "http://10.0.0.130:9578/music/getAllSongs";
-
+            string httpRequestString = "http://kaden.ghostsofutah.com:9578/music/getAllSongs";
+            // "http://10.0.0.130:9578/music/getAllSongs"; 
 
 
             Console.WriteLine(httpRequestString);
@@ -179,9 +176,9 @@ namespace Tempo.Presentation
             return ConvertSongsFromJSON(json);
         }
 
-        private List<Tempo.CloudModels.Song> ConvertSongsFromJSON(string json)
+        private List<Song> ConvertSongsFromJSON(string json)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Tempo.CloudModels.Song>>(json);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Song>>(json);
         }
 
         
@@ -202,7 +199,7 @@ namespace Tempo.Presentation
             UploadFormGrid.Visibility = Visibility.Collapsed;
         }
 
-        private async void SubmitButton_Click(object sender, RoutedEventArgs e)
+        private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
             //cloudLibraryTable.Focus = Visibility.Hidden;
             //uploadGrid.Focus = Visibility.Visible;
@@ -230,7 +227,7 @@ namespace Tempo.Presentation
                     byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
                     //get filesize from file
                     int fileSize = fileBytes.Length / 1000;
-                    Tempo.CloudModels.Song s = new Tempo.CloudModels.Song();
+                    Song s = new Song();
 
                     s.title = title;
                     s.artist = artist;
@@ -239,21 +236,14 @@ namespace Tempo.Presentation
                     s.minutes = minutes;
                     s.seconds = seconds;
                     s.fileSize = fileSize;
-                    Tempo.CloudModels.SongWithFileBytes songWithFile = new Tempo.CloudModels.SongWithFileBytes(s, fileBytes);
+                    SongWithFileBytes songWithFile = new SongWithFileBytes(s, fileBytes);
 
-                    //convert songWithFile to json
                     string songWithFileJson = Newtonsoft.Json.JsonConvert.SerializeObject(songWithFile);
 
+                    //convert songWithFile to json
                     //send songWithFile to:
                     //  http://kaden.ghostsofutah.com:9578/music/
                     //  with a post request and the json in the body
-
-                    var httpClient = new HttpClient();
-                    var response = await httpClient.PostAsync("http://kaden.ghostsofutah.com:9578/music/upload", new StringContent(songWithFileJson, System.Text.Encoding.UTF8, "application/json"));
-
-                    response.EnsureSuccessStatusCode();
-
-
                     CancelButton_Click(null, null);
                 }
                 else
@@ -269,15 +259,6 @@ namespace Tempo.Presentation
         {
             AddPlaylist addPlaylist = new AddPlaylist();
             addPlaylist.Show();
-        }
-        private void mp3FileBrowseButton_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog f = new OpenFileDialog();
-            f.Filter = "MP3 files (*.mp3)|*.mp3";
-            if(f.ShowDialog() == true)
-            {
-                filePathUploadTextBox.Text = f.FileName;
-            }
         }
 
 
