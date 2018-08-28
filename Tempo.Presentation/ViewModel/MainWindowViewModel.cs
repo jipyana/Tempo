@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using Tempo.Main.Model;
 using Tempo.Main.Model.Impl;
@@ -9,6 +10,7 @@ namespace Tempo.Presentation.ViewModel
 {
     public partial class MainWindowViewModel : DependencyObject
     {
+        MainWindow n = new MainWindow();
         public ObservableCollection<ent::Song> SongsList
         {
             get { return (ObservableCollection<ent::Song>)GetValue(ImagesListProperty); }
@@ -37,7 +39,18 @@ namespace Tempo.Presentation.ViewModel
         }
         public static readonly DependencyProperty PlaybackLoopTextProperty = DependencyProperty.Register("PlaybackLoopText", typeof(string), typeof(MainWindowViewModel), new PropertyMetadata());
 
-
+        //public List<string> GetAllSongNames
+        //{
+        //    get
+        //    {
+        //        List<string> songNames = new List<string>();
+        //        foreach (var item in n.GetAllSongsFromCloudLibrary())
+        //        {
+        //            songNames.Add(item.title);
+        //        }
+        //        return songNames;
+        //    }
+        //}
         public MainWindowViewModel()
         {
             songImporter = new SongsImporter();

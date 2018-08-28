@@ -4,9 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Tempo.Presentation"
-     
       mc:Ignorable="d" 
- 
       Title="Add Playlist"  Height="550" Width="695.854" >
 
     <Grid Background="SteelBlue" Margin="0,0,2,0">
@@ -24,7 +22,7 @@
             </ListBox.Resources>
 
         </ListBox>
-        <ListBox Grid.Column="1" x:Name="liveMusic" Margin="49,55,10,71" Background="Beige">
+        <ListBox Grid.Column="1" x:Name="liveMusic" ItemsSource="{Binding GetAllSongNames}" Margin="49,55,10,71" Background="Beige">
             <ListBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -34,7 +32,5 @@
         <Button x:Name="Complete" Margin="159,461,37,19" Click="Complete_Click" Grid.Column="0" Content="Complete"/>
         <Button x:Name="AddSong" Grid.Column="1" Click="AddSong_Click" Margin="49,463,174,19" Content="Add Song"/>
         <Button x:Name="RemoveSong" Grid.Column="1" Click="RemoveSong_Click" Margin="210,463,10,19" Content="Remove Song"/>
-
-
     </Grid>
 </Window>

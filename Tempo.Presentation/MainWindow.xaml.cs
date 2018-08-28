@@ -23,6 +23,8 @@ namespace Tempo.Presentation
         private bool mediaPlayerIsPlaying = false;
         private bool userIsDraggingSlider = false;
 
+
+       
         public MainWindow()
         {
 
@@ -151,7 +153,17 @@ namespace Tempo.Presentation
             }
         }
 
-        private List<Song> GetAllSongsFromCloudLibrary()
+        //public List<string> GetSongNames()
+        //{
+        //    List<string> songNames = new List<string>();
+        //    foreach (var item in GetAllSongsFromCloudLibrary())
+        //    {
+        //        songNames.Add(item.title);
+        //    }
+        //    return songNames;
+
+        //}
+        public List<Song> GetAllSongsFromCloudLibrary()
         {
             string json = string.Empty;
             string httpRequestString = "http://kaden.ghostsofutah.com:9578/music/getAllSongs";

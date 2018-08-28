@@ -27,11 +27,13 @@ namespace Tempo.Presentation
 
         //public IEnumerable<Song> GetSongs()
         //{
-
         //}
+        //private readonly ViewModel.MainWindowViewModel vm;
         public AddPlaylist()
         {
             InitializeComponent();
+           // vm = new ViewModel.MainWindowViewModel();
+            //this.DataContext = vm;
         }
 
         private void Complete_Click(object sender, RoutedEventArgs e)
@@ -41,11 +43,7 @@ namespace Tempo.Presentation
 
         private void AddSong_Click(object sender, RoutedEventArgs e)
         {
-            var source = newPlaylist.ItemsSource as IList;
-            if (source == null)
-            {
-                return;
-            }
+           
             //newPlaylist.add
         }
 
