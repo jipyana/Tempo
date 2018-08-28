@@ -9,13 +9,14 @@
  
       Title="Add Playlist"  Height="550" Width="695.854" >
 
-    <Grid Background="RosyBrown" Margin="0,0,2,0">
+    <Grid Background="SteelBlue" Margin="0,0,2,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="330"/>
             <ColumnDefinition Width="330"/>
         </Grid.ColumnDefinitions>
+        
         <TextBox Height="10" Margin="30,10,37,468" Text="Type In your playlist here..."/>
-        <ListBox Background="Beige" Margin="30,55,37,71" Grid.Column="0">
+        <ListBox x:Name="newPlaylist"  Background="Beige" Margin="30,55,37,71" Grid.Column="0">
             <ListBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -23,66 +24,16 @@
             </ListBox.Resources>
 
         </ListBox>
-        <ListBox Grid.Column="1" Margin="49,55,10,71" Background="Beige">
+        <ListBox Grid.Column="1" x:Name="liveMusic" Margin="49,55,10,71" Background="Beige">
             <ListBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
             </ListBox.Resources>
         </ListBox>
-        <Button x:Name="Complete" Margin="159,461,37,19" Grid.Column="0" Content="Complete"/>
-        <Button x:Name="AddSong" Grid.Column="1" Margin="49,463,174,19" Content="Add Song"/>
-        <Button x:Name="RemoveSong" Grid.Column="1" Margin="210,463,10,19" Content="Remove Song"/>
-
-
-    </Grid>
-</Window>
-
-﻿<Window x:Class="Tempo.Presentation.AddPlaylist"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Tempo.Presentation"
-     
-      mc:Ignorable="d" 
- 
-      Title="Add Playlist"  Height="550" Width="695.854" >
-
-    <Grid Background="RosyBrown" Margin="0,0,2,0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="330"/>
-            <ColumnDefinition Width="330"/>
-        </Grid.ColumnDefinitions>
-        <TextBox Height="10" Margin="30,10,37,468" Text="Type In your playlist here..."/>
-        <ListBox Background="Beige" Margin="30,55,37,71" Grid.Column="0">
-            <ListBox.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="10"/>
-                </Style>
-            </ListBox.Resources>
-            
-
-        </ListBox>
-        <ListBox Grid.Column="1" Margin="49,55,10,71" Background="Beige" ItemsSource="{Binding ConvertSongsFromJSON}">
-            <ListBox.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="10"/>
-                </Style>
-            </ListBox.Resources>
-            <ListBox.ItemTemplate>
-
-                <DataTemplate>
-                    <StackPanel>
-
-                        <TextBlock Text="{Binding ConvertSongsFromJSON}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <Button x:Name="Complete" Margin="159,461,37,19" Grid.Column="0" Content="Complete"/>
-        <Button x:Name="AddSong" Grid.Column="1" Margin="49,463,174,19" Content="Add Song"/>
-        <Button x:Name="RemoveSong" Grid.Column="1" Margin="210,463,10,19" Content="Remove Song"/>
+        <Button x:Name="Complete" Margin="159,461,37,19" Click="Complete_Click" Grid.Column="0" Content="Complete"/>
+        <Button x:Name="AddSong" Grid.Column="1" Click="AddSong_Click" Margin="49,463,174,19" Content="Add Song"/>
+        <Button x:Name="RemoveSong" Grid.Column="1" Click="RemoveSong_Click" Margin="210,463,10,19" Content="Remove Song"/>
 
 
     </Grid>

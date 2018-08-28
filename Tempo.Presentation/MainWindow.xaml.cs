@@ -72,6 +72,9 @@ namespace Tempo.Presentation
         private void PlaylistElement_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             vm.PlayCommand.Execute(null);
+            //play.IsEnabled = true;
+                
+            
         }
 
         private void OpenSettingsWindow(object sender, RoutedEventArgs e)
@@ -178,22 +181,13 @@ namespace Tempo.Presentation
             return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Song>>(json);
         }
 
-        private void addPlaylist_Click(object sender, RoutedEventArgs e)
-        {
-            AddPlaylist k = new AddPlaylist();
-            k.Show();
-        }
+        
         public void UploadButton_Click(object sender, RoutedEventArgs e)
         {
             cloudLibraryDocReader.Visibility = Visibility.Collapsed;
             UploadFormGrid.Visibility = Visibility.Visible;
         }
-        private void addPlaylist_Click(object sender, RoutedEventArgs e)
-        {
-            AddPlaylist k = new AddPlaylist();
-            k.Show();
-        }
-
+       
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             filePathUploadTextBox.Text = "";
@@ -259,6 +253,12 @@ namespace Tempo.Presentation
                 
             }
 
+        }
+
+        private void addPlaylist_Click(object sender, RoutedEventArgs e)
+        {
+            AddPlaylist addPlaylist = new AddPlaylist();
+            addPlaylist.Show();
         }
 
 

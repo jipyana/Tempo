@@ -12,8 +12,10 @@
   See http://www.galasoft.ch/mvvm
 */
 
-using CommonServiceLocator;
+//using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
+
+using Microsoft.Practices.ServiceLocation;
 
 namespace Tempo.Presentation.ViewModel
 {
