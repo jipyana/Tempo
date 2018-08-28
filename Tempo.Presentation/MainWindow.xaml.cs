@@ -9,7 +9,6 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
-using Tempo.CloudModels;
 using Tempo.Presentation.UserControls;
 using Tempo.Presentation.ViewModel;
 using System.Windows.Documents;
@@ -105,7 +104,8 @@ namespace Tempo.Presentation
 
             string json = string.Empty;
             string httpRequestString = $"http://kaden.ghostsofutah.com:9578/music/getSongs/title={title}&artist={artist}&genre={genre}";
-            // $"http://10.0.0.130:9578/music/getSongs/title={title}&artist={artist}&genre={genre}"; 
+                                       // $"http://10.0.0.130:9578/music/getSongs/title={title}&artist={artist}&genre={genre}";
+
 
 
             Console.WriteLine(httpRequestString);
@@ -123,7 +123,7 @@ namespace Tempo.Presentation
             //json = json.Replace("\"", "");
 
             // Convert JSON into ArrayList<Song>        
-            List<Song> songs = ConvertSongsFromJSON(json);
+            List<Tempo.CloudModels.Song> songs = ConvertSongsFromJSON(json);
 
             SetSongsToTable(songs);
             
@@ -132,10 +132,10 @@ namespace Tempo.Presentation
 
         }
 
-        public void SetSongsToTable(List<Song> songs)
+        public void SetSongsToTable(List<Tempo.CloudModels.Song> songs)
         {
             ClearCloudTable();
-            foreach (Song s in songs)
+            foreach (Tempo.CloudModels.Song s in songs)
             {
                 TableRow tableRow = new TableRow();
                 tableRow.Cells.Add(new TableCell());
@@ -148,11 +148,12 @@ namespace Tempo.Presentation
             }
         }
 
-        private List<Song> GetAllSongsFromCloudLibrary()
+        private List<Tempo.CloudModels.Song> GetAllSongsFromCloudLibrary()
         {
             string json = string.Empty;
-            string httpRequestString = "http://kaden.ghostsofutah.com:9578/music/getAllSongs";
-            // "http://10.0.0.130:9578/music/getAllSongs"; 
+            string httpRequestString = "http://kaden.ghostsofutah.com:9578/music/getAllSongs"; 
+                                       // "http://10.0.0.130:9578/music/getAllSongs";
+
 
 
             Console.WriteLine(httpRequestString);
@@ -173,9 +174,9 @@ namespace Tempo.Presentation
             return ConvertSongsFromJSON(json);
         }
 
-        private List<Song> ConvertSongsFromJSON(string json)
+        private List<Tempo.CloudModels.Song> ConvertSongsFromJSON(string json)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Song>>(json);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Tempo.CloudModels.Song>>(json);
         }
 
         public void UploadButton_Click(object sender, RoutedEventArgs e)
@@ -223,7 +224,7 @@ namespace Tempo.Presentation
                     byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
                     //get filesize from file
                     int fileSize = fileBytes.Length / 1000;
-                    Song s = new Song();
+                    Tempo.CloudModels.Song s = new Tempo.CloudModels.Song();
 
                     s.title = title;
                     s.artist = artist;
@@ -232,14 +233,15 @@ namespace Tempo.Presentation
                     s.minutes = minutes;
                     s.seconds = seconds;
                     s.fileSize = fileSize;
-                    SongWithFileBytes songWithFile = new SongWithFileBytes(s, fileBytes);
-
-                    string songWithFileJson = Newtonsoft.Json.JsonConvert.SerializeObject(songWithFile);
+                    Tempo.CloudModels.SongWithFileBytes songWithFile = new Tempo.CloudModels.SongWithFileBytes(s, fileBytes);
 
                     //convert songWithFile to json
+                    string songWithFileJson = Newtonsoft.Json.JsonConvert.SerializeObject(songWithFile);
+
                     //send songWithFile to:
                     //  http://kaden.ghostsofutah.com:9578/music/
                     //  with a post request and the json in the body
+
                     CancelButton_Click(null, null);
                 }
                 else
