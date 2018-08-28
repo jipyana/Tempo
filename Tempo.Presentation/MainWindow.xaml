@@ -85,10 +85,10 @@
                         </Grid>
                     </TabItem>
 
-                    <TabItem Header="Cloud Library" Margin="47,0,-104,-3">
+                    <TabItem Header="Cloud Library" Margin="0,0,-104,-3">
                         <Grid x:Name="GridMain4" Height="530" Background="SteelBlue"
               IsEnabled="True" Visibility="Visible" Width="1069">
-                            <Grid Margin="0,70,0,10">
+                            <Grid Margin="0,90,0,10">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height=".1*"/>
                                     <RowDefinition Height="*"/>
