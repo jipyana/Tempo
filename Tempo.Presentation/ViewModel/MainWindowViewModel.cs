@@ -10,7 +10,7 @@ namespace Tempo.Presentation.ViewModel
 {
     public partial class MainWindowViewModel : DependencyObject
     {
-        MainWindow n = new MainWindow();
+        //MainWindow n = new MainWindow();
         public ObservableCollection<ent::Song> SongsList
         {
             get { return (ObservableCollection<ent::Song>)GetValue(ImagesListProperty); }
@@ -53,6 +53,7 @@ namespace Tempo.Presentation.ViewModel
         //}
         public MainWindowViewModel()
         {
+            
             songImporter = new SongsImporter();
             playlist     = new XmlPlaylist();
             audioPlayer  = new AudioPlayer();

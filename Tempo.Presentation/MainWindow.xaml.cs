@@ -22,8 +22,7 @@ namespace Tempo.Presentation
     {
         private bool mediaPlayerIsPlaying = false;
         private bool userIsDraggingSlider = false;
-
-
+        private readonly ViewModel.MainWindowViewModel vm;
        
         public MainWindow()
         {
@@ -69,7 +68,6 @@ namespace Tempo.Presentation
         //{
         //    GridMain.Volume += (e.Delta > 0) ? 0.1 : -0.1;
         //}
-        private readonly ViewModel.MainWindowViewModel vm;
 
         private void PlaylistElement_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -95,10 +93,10 @@ namespace Tempo.Presentation
 
         private void ClearCloudTable()
         {
-            while(cloudLibraryTable.RowGroups[0].Rows.Count > 1)
-            {
-                cloudLibraryTable.RowGroups[0].Rows.RemoveAt(1);
-            }
+            //while(cloudLibraryTable.RowGroups[0].Rows.Count > 1)
+            //{
+            //    cloudLibraryTable.RowGroups[0].Rows.RemoveAt(1);
+            //}
         }
 
         // kaden.ghostsofutah.com:9578/music/help
@@ -109,9 +107,8 @@ namespace Tempo.Presentation
             String genre = genreTextBox.Text;
 
             string json = string.Empty;
-            string httpRequestString = $"http://kaden.ghostsofutah.com:9578/music/getSongs/title={title}&artist={artist}&genre={genre}";
-            // $"http://10.0.0.130:9578/music/getSongs/title={title}&artist={artist}&genre={genre}"; 
-
+            string httpRequestString =  $"http://10.0.0.130:9578/music/getSongs/title={title}&artist={artist}&genre={genre}";
+            // $"http://kaden.ghostsofutah.com:9578/music/getSongs/title={title}&artist={artist}&genre={genre}";
 
             Console.WriteLine(httpRequestString);
             //HTTP request with search parameters
@@ -149,7 +146,7 @@ namespace Tempo.Presentation
                 tableRow.Cells.Add(new TableCell(new Paragraph(new Run(s.getGenre()))));
                 tableRow.Cells.Add(new TableCell(new Paragraph(new Run("" + s.getHours() + ":" + s.getMinutes() + ":" + s.getSeconds()))));
                 tableRow.Cells.Add(new TableCell(new Paragraph(new Run("" + (double)(s.getFileSize() / 1000.0) + "mb"))));
-                cloudLibraryTable.RowGroups[0].Rows.Add(tableRow);
+                //cloudLibraryTable.RowGroups[0].Rows.Add(tableRow);
             }
         }
 
@@ -163,12 +160,11 @@ namespace Tempo.Presentation
         //    return songNames;
 
         //}
-        public List<Song> GetAllSongsFromCloudLibrary()
+        public static List<Song> GetAllSongsFromCloudLibrary()
         {
             string json = string.Empty;
-            string httpRequestString = "http://kaden.ghostsofutah.com:9578/music/getAllSongs";
-            // "http://10.0.0.130:9578/music/getAllSongs"; 
-
+            string httpRequestString = "http://10.0.0.130:9578/music/getAllSongs";
+            // "http://kaden.ghostsofutah.com:9578/music/getAllSongs";
 
             Console.WriteLine(httpRequestString);
             //HTTP request with search parameters
@@ -188,7 +184,7 @@ namespace Tempo.Presentation
             return ConvertSongsFromJSON(json);
         }
 
-        private List<Song> ConvertSongsFromJSON(string json)
+        private static List<Song> ConvertSongsFromJSON(string json)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Song>>(json);
         }

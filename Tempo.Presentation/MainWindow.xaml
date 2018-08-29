@@ -11,8 +11,6 @@
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowIconOnTitleBar="True" 
         Icon="Assets/Images/MetronomeIcon.png" BorderThickness="0" GlowBrush="Black">
 
-
-
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
             <Button Content="settings" Click="OpenSettingsWindow"/>
@@ -111,7 +109,7 @@
                                                     ViewingMode="Scroll" Margin="0,5,35,10" >
                                     <FlowDocument>
 
-                                        <Table x:Name="cloudLibraryTable" CellSpacing="1">
+                                        <!--<Table x:Name="cloudLibraryTable" CellSpacing="1">
 
                                             <Table.Columns>
                                                 <TableColumn/>
@@ -123,7 +121,6 @@
 
                                             <TableRowGroup>
 
-                                                <!-- Header row for the table. -->
                                                 <TableRow Background="LightGoldenrodYellow">
                                                     <TableCell></TableCell>
                                                     <TableCell>
@@ -146,7 +143,21 @@
 
 
                                             </TableRowGroup>
-                                        </Table>
+                                        </Table>-->
+
+                                        <BlockUIContainer>
+                                            <ListView BorderThickness="0">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" Width="270" />
+                                                        <GridViewColumn Header="Artist" DisplayMemberBinding="{Binding Artist}" Width="250" />
+                                                        <GridViewColumn Header="Genre" DisplayMemberBinding="{Binding Genre}" Width="250" />
+                                                        <GridViewColumn Header="FileSize" DisplayMemberBinding="{Binding FileSize}" Width="150" />
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                        </BlockUIContainer>
+
                                     </FlowDocument>
                                 </FlowDocumentReader>
 
