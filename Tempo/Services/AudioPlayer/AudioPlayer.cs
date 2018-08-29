@@ -25,10 +25,10 @@ namespace Tempo.Services.AudioPlayer
 
         public event PlaybackEnded OnPlaybackEnded;
 
-        public static int GetSongLength(ent::Song song)
+        public static double GetSongLength(ent::Song song)
         {
             TimeSpan timeSpan = new Mp3FileReader(song.Uri).TotalTime;
-            int time = (int)timeSpan.TotalSeconds;
+            double time = timeSpan.TotalSeconds;
             return time;
         }
 
