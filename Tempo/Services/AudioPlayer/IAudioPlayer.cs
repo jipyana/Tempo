@@ -12,6 +12,7 @@ namespace Tempo.Services.AudioPlayer
         void ProcessCommand(IAudioPlayerCommand command);
 
         bool        IsPlaying           { get; }
+        bool        IsPaused            { get; }
         ent::Song   PlayingSong         { get; }
 
         event PlaybackEnded OnPlaybackEnded;

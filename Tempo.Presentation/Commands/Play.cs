@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Tempo.Services.AudioPlayer.Commands;
+using Tempo.Presentation.Properties;
 
 namespace Tempo.Presentation.ViewModel
 {
@@ -17,8 +18,17 @@ namespace Tempo.Presentation.ViewModel
                 audioPlayer.ProcessCommand(new Commands.Play(songToPlay: this.SelectedSong));
                 this.PlayingSong = this.SelectedSong;
                 this.ProgressBarMax = Tempo.Services.AudioPlayer.AudioPlayer.GetSongLength(this.SelectedSong);
-                // mainWindow timer reset
-                // mainWindow timer start
+                
+                if (!audioPlayer.IsPaused && audioPlayer.IsPlaying)
+                {
+                    Tempo.Presentation.MainWindow.timer.Stop();
+                }
+                else if(!audioPlayer.IsPlaying)
+                {
+                    this.ProgressBarValue = 0;
+                }
+                Tempo.Presentation.MainWindow.timer.Start();
+
             };
         }
         private Func<bool> playCommandCanExecute()

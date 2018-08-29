@@ -13,6 +13,12 @@ namespace Tempo.Presentation.ViewModel
     {
         //MainWindow n = new MainWindow();
 
+        public double ProgressBarValue
+        {
+            get { return (double)GetValue(ProgressBarValueProperty); }
+            set { SetValue(ProgressBarValueProperty, value); }
+        }
+        public static readonly DependencyProperty ProgressBarValueProperty = DependencyProperty.Register("ProgressBarValue", typeof(double), typeof(MainWindowViewModel), new PropertyMetadata());
         public double ProgressBarMax
         {
             get { return (double)GetValue(ProgressBarMaxProperty); }

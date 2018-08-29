@@ -41,7 +41,7 @@ namespace Tempo.Services.AudioPlayer
             }
             else
             {
-                MessageBox.Show("" + new Mp3FileReader(song.Uri).TotalTime);
+                //MessageBox.Show("" + new Mp3FileReader(song.Uri).TotalTime);
                 song.Should().NotBeNull();
                 this.Stop();
 

@@ -12,8 +12,8 @@
             <ColumnDefinition Width="330"/>
             <ColumnDefinition Width="330"/>
         </Grid.ColumnDefinitions>
-        
-        <TextBox Height="10" Margin="30,10,37,468" Text="Type In your playlist here..."/>
+
+        <TextBox x:Name="folderName" Height="10" Margin="30,10,37,468" Text="Type In your playlist here..."/>
         <ListBox x:Name="newPlaylist"  Background="Beige" Margin="30,55,37,71" Grid.Column="0">
             <ListBox.Resources>
                 <Style TargetType="Border">
@@ -22,7 +22,7 @@
             </ListBox.Resources>
 
         </ListBox>
-        <ListBox Grid.Column="1" x:Name="liveMusic" ItemsSource="{Binding GetAllSongNames}" Margin="49,55,10,71" Background="Beige">
+        <ListBox Grid.Column="1" x:Name="liveMusic" ItemsSource="{Binding GetSongNames}" Margin="49,55,10,71" Background="Beige">
             <ListBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>

@@ -28,8 +28,8 @@ namespace Tempo.Presentation
         private bool userIsDraggingSlider = false;
         private readonly ViewModel.MainWindowViewModel vm;
         public ObservableCollection<Tempo.CloudModels.ListViewSong> CloudSongList;
-        DispatcherTimer timer = new DispatcherTimer();
-       
+        public static DispatcherTimer timer = new DispatcherTimer();
+
         public MainWindow()
         {
 
@@ -45,11 +45,31 @@ namespace Tempo.Presentation
             //timer.Start();
             SetSongsToTable(GetAllSongsFromCloudLibrary());
 
+
+            var musicFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
+
+            var directories = Directory.GetDirectories(musicFolder);
+
+            foreach (var item in directories)
+            {
+
+
+                string[] directoryArr = item.ToString().Split('\\');
+
+                myPlaylist.Items.Add(directoryArr[directoryArr.Length - 1]);
+
+                this.Show();
+            }
+               
         }
 
         private void timer_Tick(object sender, EventArgs e)
         {
             sliProgress.Value++;
+            int hours = (int)(sliProgress.Value / 3600);
+            int mins = (int)(sliProgress.Value - hours * 3600) / 60;
+            int secs = (int)(sliProgress.Value - (hours * 3600) - (mins * 60));
+            lblProgressStatus.Text = "" + hours + ":" + mins + ":" + secs;
         }
 
         private void sliProgress_DragStarted(object sender, DragStartedEventArgs e)
@@ -77,8 +97,8 @@ namespace Tempo.Presentation
         {
             vm.PlayCommand.Execute(null);
             //play.IsEnabled = true;
-                
-            
+
+
         }
 
         private void OpenSettingsWindow(object sender, RoutedEventArgs e)
@@ -89,10 +109,10 @@ namespace Tempo.Presentation
             window.ShowDialog();
         }
 
-      
+
         private void DownloadButton_Click(object sender, RoutedEventArgs e)
         {
-            if(cloudListView.SelectedItems.Count > 1)
+            if (cloudListView.SelectedItems.Count > 1)
             {
                 foreach (ListViewSong s in cloudListView.SelectedItems)
                 {
@@ -131,7 +151,7 @@ namespace Tempo.Presentation
                 path += songWithBytes.song.title + ".mp3";
                 System.IO.File.WriteAllBytes(path, songWithBytes.fileBytes);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show("Error occured trying to download your song");
             }
@@ -143,7 +163,7 @@ namespace Tempo.Presentation
             {
                 CloudSongList.RemoveAt(0);
             }
-            while(cloudListView.Items.Count > 0)
+            while (cloudListView.Items.Count > 0)
             {
                 cloudListView.Items.RemoveAt(0);
             }
@@ -157,7 +177,7 @@ namespace Tempo.Presentation
             String genre = genreTextBox.Text;
 
             string json = string.Empty;
-            string httpRequestString =  $"http://kaden.ghostsofutah.com:9578/music/getSongs/title={title}&artist={artist}&genre={genre}";
+            string httpRequestString = $"http://kaden.ghostsofutah.com:9578/music/getSongs/title={title}&artist={artist}&genre={genre}";
             // $"http://kaden.ghostsofutah.com:9578/music/getSongs/title={title}&artist={artist}&genre={genre}";
 
             Console.WriteLine(httpRequestString);
@@ -178,7 +198,7 @@ namespace Tempo.Presentation
             List<Song> songs = ConvertSongsFromJSON(json);
 
             SetSongsToTable(songs);
-            
+
             // Put all of them into table
 
 
@@ -198,7 +218,7 @@ namespace Tempo.Presentation
                 item.FileSize = fileSize;
                 item.Id = id;
                 CloudSongList.Add(item);
-                
+
                 //cloudLibraryTable.RowGroups[0].Rows.Add(tableRow);
             }
 
@@ -210,16 +230,18 @@ namespace Tempo.Presentation
             //view.Refresh();
         }
 
-        //public List<string> GetSongNames()
-        //{
-        //    List<string> songNames = new List<string>();
-        //    foreach (var item in GetAllSongsFromCloudLibrary())
-        //    {
-        //        songNames.Add(item.title);
-        //    }
-        //    return songNames;
+        public static List<string> GetSongNames()
+        {
+            List<string> songNames = new List<string>();
+            foreach (var item in GetAllSongsFromCloudLibrary())
+            {
+                songNames.Add(item.title);
+            }
+            return songNames;
 
-        //}
+        }
+
+
         public static List<Song> GetAllSongsFromCloudLibrary()
         {
             string json = string.Empty;
@@ -239,7 +261,7 @@ namespace Tempo.Presentation
             }
 
             //json = json.Replace("\"", "");
-            
+
             // Convert JSON into ArrayList<Song>        
             return ConvertSongsFromJSON(json);
         }
@@ -248,13 +270,13 @@ namespace Tempo.Presentation
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Song>>(json);
         }
-        
+
         public void UploadButton_Click(object sender, RoutedEventArgs e)
         {
             cloudLibraryDocReader.Visibility = Visibility.Collapsed;
             UploadFormGrid.Visibility = Visibility.Visible;
         }
-       
+
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             filePathUploadTextBox.Text = "";
@@ -276,7 +298,7 @@ namespace Tempo.Presentation
             //Get the song detail strings from pop up window
 
             string filePath = filePathUploadTextBox.Text;
-            if(filePath == "" || filePath == null || filePath.Split('.')[filePath.Split('.').Length - 1] != "mp3")
+            if (filePath == "" || filePath == null || filePath.Split('.')[filePath.Split('.').Length - 1] != "mp3")
             {
                 MessageBox.Show("That is an invalid File please choose an mp3 file before submitting");
             }
@@ -289,7 +311,7 @@ namespace Tempo.Presentation
                 int minutes = 0;
                 int seconds = 0;
 
-                if(File.Exists(filePath))
+                if (File.Exists(filePath))
                 {
                     byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
                     //get filesize from file
@@ -323,7 +345,7 @@ namespace Tempo.Presentation
                 {
                     MessageBox.Show("The specified File does not exist");
                 }
-                
+
             }
 
         }

@@ -16,6 +16,14 @@ namespace Tempo.Presentation.ViewModel
             return () =>
             {
                 audioPlayer.ProcessCommand(new Commands.Pause());
+
+                if (!audioPlayer.IsPaused)
+                {
+                    Tempo.Presentation.MainWindow.timer.Stop();
+                } else
+                {
+                    Tempo.Presentation.MainWindow.timer.Start();
+                }
                 // main window timer pause or resume
             };
         }
