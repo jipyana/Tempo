@@ -20,6 +20,8 @@ namespace Tempo.Presentation.ViewModel
                 this.PlayingSong = null;
                 this.playlist.Clear();
                 this.SongsList.Clear();
+                this.ProgressBarValue = 0;
+                Tempo.Presentation.MainWindow.timer.Stop();
             };
         }
         private Func<bool> clearCommandCanExecute()

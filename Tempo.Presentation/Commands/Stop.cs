@@ -17,6 +17,8 @@ namespace Tempo.Presentation.ViewModel
             {
                 audioPlayer.ProcessCommand(new Commands.Stop());
                 this.PlayingSong = null;
+                Tempo.Presentation.MainWindow.timer.Stop();
+                this.ProgressBarValue = 0;
             };
         }
         private Func<bool> stopCommandCanExecute()

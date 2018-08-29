@@ -17,7 +17,7 @@ namespace Tempo.Presentation.ViewModel
             {
                 audioPlayer.ProcessCommand(new Commands.Pause());
 
-                if (!audioPlayer.IsPaused)
+                if (audioPlayer.IsPaused && audioPlayer.IsPlaying)
                 {
                     Tempo.Presentation.MainWindow.timer.Stop();
                 } else

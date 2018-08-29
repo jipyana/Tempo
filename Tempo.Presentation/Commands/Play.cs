@@ -19,13 +19,10 @@ namespace Tempo.Presentation.ViewModel
                 this.PlayingSong = this.SelectedSong;
                 this.ProgressBarMax = Tempo.Services.AudioPlayer.AudioPlayer.GetSongLength(this.SelectedSong);
                 
-                if (!audioPlayer.IsPaused && audioPlayer.IsPlaying)
-                {
-                    Tempo.Presentation.MainWindow.timer.Stop();
-                }
-                else if(!audioPlayer.IsPlaying)
+                if(!audioPlayer.IsPaused)
                 {
                     this.ProgressBarValue = 0;
+                    Tempo.Presentation.MainWindow.timer.Stop();
                 }
                 Tempo.Presentation.MainWindow.timer.Start();
 

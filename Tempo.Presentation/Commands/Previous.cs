@@ -20,6 +20,9 @@ namespace Tempo.Presentation.ViewModel
                 var nextSong = playlist.GetOne_byIndex(indexOfCurrentSong - 1);
                 audioPlayer.ProcessCommand(new Commands.Play(songToPlay: nextSong));
                 this.PlayingSong = nextSong;
+                this.ProgressBarValue = 0;
+                Tempo.Presentation.MainWindow.timer.Stop();
+                Tempo.Presentation.MainWindow.timer.Start();
             };
         }
         private Func<bool> previousCommandCanExecute()
