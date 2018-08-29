@@ -76,6 +76,7 @@ namespace Tempo.Presentation.ViewModel
                     audioPlayer.Play(nextSong);
                     this.PlayingSong = nextSong;
                 }
+                MainWindow.GetAllSongsFromCloudLibrary();
             };
         }
         private readonly ISongsImporter songImporter;

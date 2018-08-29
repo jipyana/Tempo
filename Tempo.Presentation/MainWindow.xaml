@@ -16,6 +16,7 @@
             <Button Content="settings" Click="OpenSettingsWindow"/>
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
+
     <StackPanel >
 
         <Grid Height="579">
@@ -109,52 +110,19 @@
                                                     ViewingMode="Scroll" Margin="0,5,35,10" >
                                     <FlowDocument>
 
-                                        <!--<Table x:Name="cloudLibraryTable" CellSpacing="1">
-
-                                            <Table.Columns>
-                                                <TableColumn/>
-                                                <TableColumn/>
-                                                <TableColumn/>
-                                                <TableColumn/>
-                                                <TableColumn/>
-                                            </Table.Columns>
-
-                                            <TableRowGroup>
-
-                                                <TableRow Background="LightGoldenrodYellow">
-                                                    <TableCell></TableCell>
-                                                    <TableCell>
-                                                        <Paragraph FontSize="12pt" FontWeight="Bold">Title</Paragraph>
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        <Paragraph FontSize="12pt" FontWeight="Bold">Artist</Paragraph>
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        <Paragraph FontSize="12pt" FontWeight="Bold">Genre</Paragraph>
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        <Paragraph FontSize="12pt" FontWeight="Bold">Length</Paragraph>
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        <Paragraph FontSize="12pt" FontWeight="Bold">FileSize</Paragraph>
-                                                    </TableCell>
-                                                </TableRow>
-
-
-
-                                            </TableRowGroup>
-                                        </Table>-->
-
-                                        <BlockUIContainer>
-                                            <ListView BorderThickness="0">
+                                        <BlockUIContainer x:Name="cloudUIContainer">
+                                            <ListView x:Name="cloudListView" BorderThickness="0" ItemsSource="{Binding CloudSongList}">
                                                 <ListView.View>
                                                     <GridView>
                                                         <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" Width="270" />
                                                         <GridViewColumn Header="Artist" DisplayMemberBinding="{Binding Artist}" Width="250" />
                                                         <GridViewColumn Header="Genre" DisplayMemberBinding="{Binding Genre}" Width="250" />
-                                                        <GridViewColumn Header="FileSize" DisplayMemberBinding="{Binding FileSize}" Width="150" />
+                                                        <GridViewColumn Header="FileSize" DisplayMemberBinding="{Binding FileSize}" Width="120" />
+                                                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50" />
                                                     </GridView>
                                                 </ListView.View>
+
+                                                
                                             </ListView>
                                         </BlockUIContainer>
 
@@ -173,7 +141,7 @@
                                     <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,10">
                                         <TextBlock Margin="10,0" FontSize="24" VerticalAlignment="Center">mp3 FilePath:</TextBlock>
                                         <TextBox x:Name="filePathUploadTextBox" FontSize="24" Width="750" IsEnabled="False"></TextBox>
-                                        <Button x:Name="mp3FileBrowseButton" FontSize="24" Margin="10, 0">Browse</Button>
+                                        <Button x:Name="mp3FileBrowseButton" Click="mp3FileBrowseButton_Click" FontSize="24" Margin="10, 0">Browse</Button>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,10">
                                         <TextBlock Margin="100,0,10,0" FontSize="24" VerticalAlignment="Center">Title:</TextBlock>

@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CloudModels\ListViewSong.cs" />
     <Compile Include="CloudModels\Song.cs" />
     <Compile Include="CloudModels\SongWithFileBytes.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />

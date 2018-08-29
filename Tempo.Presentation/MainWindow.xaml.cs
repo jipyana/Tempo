@@ -15,6 +15,10 @@ using Tempo.Presentation.ViewModel;
 using System.Windows.Documents;
 using System.Net;
 using System.IO;
+using Microsoft.Win32;
+using System.Net.Http;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace Tempo.Presentation
 {
@@ -23,6 +27,7 @@ namespace Tempo.Presentation
         private bool mediaPlayerIsPlaying = false;
         private bool userIsDraggingSlider = false;
         private readonly ViewModel.MainWindowViewModel vm;
+        public ObservableCollection<Tempo.CloudModels.ListViewSong> CloudSongList;
        
         public MainWindow()
         {
@@ -30,6 +35,8 @@ namespace Tempo.Presentation
             InitializeComponent();
             vm = new ViewModel.MainWindowViewModel();
             this.DataContext = vm;
+
+            CloudSongList = new ObservableCollection<ListViewSong>();
 
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
@@ -88,15 +95,59 @@ namespace Tempo.Presentation
       
         private void DownloadButton_Click(object sender, RoutedEventArgs e)
         {
+            if(cloudListView.SelectedItems.Count > 1)
+            {
+                foreach (ListViewSong s in cloudListView.SelectedItems)
+                {
+                    DownloadSongFromIdAsync(Int32.Parse(s.Id));
+                }
+            }
+            else
+            {
+                ListViewSong s = (ListViewSong)cloudListView.SelectedItem;
+                DownloadSongFromIdAsync(Int32.Parse(s.Id));
+            }
+        }
 
+        private async void DownloadSongFromIdAsync(int id)
+        {
+            try
+            {
+                string json = "";
+                string httpRequestString = $"http://10.0.0.130:9578/music/getfile/{id}";
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(httpRequestString);
+                request.AutomaticDecompression = DecompressionMethods.GZip;
+
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                using (Stream stream = response.GetResponseStream())
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    json = reader.ReadToEnd();
+                }
+
+                SongWithFileBytes songWithBytes = Newtonsoft.Json.JsonConvert.DeserializeObject<SongWithFileBytes>(json);
+                string path = "C:/Users/kdncrts/Music/Tempo/Downloads/";
+                //path += get to users music folder
+                //create tempo folder
+                path += songWithBytes.song.title + ".mp3";
+                System.IO.File.WriteAllBytes(path, songWithBytes.fileBytes);
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("Error occured trying to download your song");
+            }
         }
 
         private void ClearCloudTable()
         {
-            //while(cloudLibraryTable.RowGroups[0].Rows.Count > 1)
-            //{
-            //    cloudLibraryTable.RowGroups[0].Rows.RemoveAt(1);
-            //}
+            while (CloudSongList.Count > 0)
+            {
+                CloudSongList.RemoveAt(0);
+            }
+            while(cloudListView.Items.Count > 0)
+            {
+                cloudListView.Items.RemoveAt(0);
+            }
         }
 
         // kaden.ghostsofutah.com:9578/music/help
@@ -139,15 +190,25 @@ namespace Tempo.Presentation
             ClearCloudTable();
             foreach (Song s in songs)
             {
-                TableRow tableRow = new TableRow();
-                tableRow.Cells.Add(new TableCell());
-                tableRow.Cells.Add(new TableCell(new Paragraph(new Run(s.getTitle()))));
-                tableRow.Cells.Add(new TableCell(new Paragraph(new Run(s.getArtist()))));
-                tableRow.Cells.Add(new TableCell(new Paragraph(new Run(s.getGenre()))));
-                tableRow.Cells.Add(new TableCell(new Paragraph(new Run("" + s.getHours() + ":" + s.getMinutes() + ":" + s.getSeconds()))));
-                tableRow.Cells.Add(new TableCell(new Paragraph(new Run("" + (double)(s.getFileSize() / 1000.0) + "mb"))));
+                string fileSize = "" + s.fileSize / 1000 + "mb";
+                string id = "" + s.id;
+                var item = new ListViewSong();
+                item.Title = s.title;
+                item.Artist = s.artist;
+                item.Genre = s.genre;
+                item.FileSize = fileSize;
+                item.Id = id;
+                CloudSongList.Add(item);
+                
                 //cloudLibraryTable.RowGroups[0].Rows.Add(tableRow);
             }
+
+            foreach (ListViewSong lvs in CloudSongList)
+            {
+                cloudListView.Items.Add(lvs);
+            }
+            //ICollectionView view = CollectionViewSource.GetDefaultView(CloudSongList);
+            //view.Refresh();
         }
 
         //public List<string> GetSongNames()
@@ -179,7 +240,7 @@ namespace Tempo.Presentation
             }
 
             //json = json.Replace("\"", "");
-
+            
             // Convert JSON into ArrayList<Song>        
             return ConvertSongsFromJSON(json);
         }
@@ -188,7 +249,6 @@ namespace Tempo.Presentation
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Song>>(json);
         }
-
         
         public void UploadButton_Click(object sender, RoutedEventArgs e)
         {
@@ -207,7 +267,7 @@ namespace Tempo.Presentation
             UploadFormGrid.Visibility = Visibility.Collapsed;
         }
 
-        private void SubmitButton_Click(object sender, RoutedEventArgs e)
+        private async void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
             //cloudLibraryTable.Focus = Visibility.Hidden;
             //uploadGrid.Focus = Visibility.Visible;
@@ -252,6 +312,12 @@ namespace Tempo.Presentation
                     //send songWithFile to:
                     //  http://kaden.ghostsofutah.com:9578/music/
                     //  with a post request and the json in the body
+
+                    var httpClient = new HttpClient();
+                    var response = await httpClient.PostAsync("http://10.0.0.130:9578/music/upload", new StringContent(songWithFileJson, System.Text.Encoding.UTF8, "application/json"));
+                    // "http://kaden.ghostsofutah.com:9578/music/upload"
+                    response.EnsureSuccessStatusCode();
+
                     CancelButton_Click(null, null);
                 }
                 else
@@ -268,7 +334,15 @@ namespace Tempo.Presentation
             AddPlaylist addPlaylist = new AddPlaylist();
             addPlaylist.Show();
         }
-
+        private void mp3FileBrowseButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog f = new OpenFileDialog();
+            f.Filter = "MP3 files (*.mp3)|*.mp3";
+            if (f.ShowDialog() == true)
+            {
+                filePathUploadTextBox.Text = f.FileName;
+            }
+        }
 
 
         //private void GridMain_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
