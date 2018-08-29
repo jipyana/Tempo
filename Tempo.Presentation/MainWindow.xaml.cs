@@ -29,6 +29,7 @@ namespace Tempo.Presentation
         private readonly ViewModel.MainWindowViewModel vm;
         public ObservableCollection<Tempo.CloudModels.ListViewSong> CloudSongList;
         public static DispatcherTimer timer = new DispatcherTimer();
+        public ObservableCollection<string> listOfPaths;
 
         public MainWindow()
         {
@@ -40,27 +41,26 @@ namespace Tempo.Presentation
             sliProgress.Value = 0;
 
             CloudSongList = new ObservableCollection<ListViewSong>();
+            listOfPaths = new ObservableCollection<string>();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick;
-            //timer.Start();
+            //timer.StartCloud
             SetSongsToTable(GetAllSongsFromCloudLibrary());
 
 
             var musicFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
 
             var directories = Directory.GetDirectories(musicFolder);
+            
 
             foreach (var item in directories)
             {
+                string[] directoryArr = item.Split('\\');
 
-
-                string[] directoryArr = item.ToString().Split('\\');
-
-                myPlaylist.Items.Add(directoryArr[directoryArr.Length - 1]);
-
-                this.Show();
+                listOfPaths.Add(directoryArr[directoryArr.Length - 1]);
             }
-               
+
+            myPlaylist.ItemsSource = listOfPaths;
         }
 
         private void timer_Tick(object sender, EventArgs e)
