@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 using NAudio.Wave;
+using System;
+using System.Windows.Forms;
 using Tempo.Services.AudioPlayer.Commands;
 using ent = Tempo.Main.Entities;
 
@@ -23,6 +25,12 @@ namespace Tempo.Services.AudioPlayer
 
         public event PlaybackEnded OnPlaybackEnded;
 
+        public static int GetSongLength(ent::Song song)
+        {
+            TimeSpan timeSpan = new Mp3FileReader(song.Uri).TotalTime;
+            int time = (int)timeSpan.TotalSeconds;
+            return time;
+        }
 
         public void Play(ent::Song song)
         {
@@ -33,6 +41,7 @@ namespace Tempo.Services.AudioPlayer
             }
             else
             {
+                MessageBox.Show("" + new Mp3FileReader(song.Uri).TotalTime);
                 song.Should().NotBeNull();
                 this.Stop();
 

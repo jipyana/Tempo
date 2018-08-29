@@ -180,7 +180,7 @@
 
                 <TextBlock Name="lblProgressStatus" Grid.Row="0" Margin="50,18,110,0">00:00:00</TextBlock>
                 <Label Content="{Binding PlayingSong.Name}" FontSize="20" HorizontalAlignment="Left" Margin="15,6,0,0" VerticalAlignment="Top" Height="10" Width="10" />
-                <Slider Name="sliProgress" Margin="113,18,318,0" Grid.Row="0" Grid.ColumnSpan="4" />
+                <Slider Name="sliProgress" Value="{Binding ProgressBarPosition}" Maximum="{Binding ProgressBarMaximum}" Margin="113,18,318,0" Grid.Row="0" Grid.ColumnSpan="4" IsEnabled="False" />
                 <ProgressBar Name="pbVolume" Height="Auto" Maximum="1" RenderTransformOrigin="1.104,0.357" Grid.Row="0" Grid.Column="3" Margin="278,25,133,5"/>
 
                 <Button fa:Awesome.Content="StepBackward" Command="{Binding PreviousCommand}" Visibility="Visible"  Grid.Row="1" HorizontalAlignment="Left" Margin="43,2,0,10" VerticalAlignment="Center" Width="30"

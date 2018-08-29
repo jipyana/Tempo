@@ -16,6 +16,9 @@ namespace Tempo.Presentation.ViewModel
             {
                 audioPlayer.ProcessCommand(new Commands.Play(songToPlay: this.SelectedSong));
                 this.PlayingSong = this.SelectedSong;
+                this.ProgressBarMax = Tempo.Services.AudioPlayer.AudioPlayer.GetSongLength(this.SelectedSong);
+                // mainWindow timer reset
+                // mainWindow timer start
             };
         }
         private Func<bool> playCommandCanExecute()

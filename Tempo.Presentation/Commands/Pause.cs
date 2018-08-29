@@ -16,6 +16,7 @@ namespace Tempo.Presentation.ViewModel
             return () =>
             {
                 audioPlayer.ProcessCommand(new Commands.Pause());
+                // main window timer pause or resume
             };
         }
         private Func<bool> pauseCommandCanExecute()

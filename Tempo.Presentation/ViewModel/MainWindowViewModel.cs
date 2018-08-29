@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 using Tempo.Main.Model;
 using Tempo.Main.Model.Impl;
 using Tempo.Services.AudioPlayer;
@@ -11,6 +12,14 @@ namespace Tempo.Presentation.ViewModel
     public partial class MainWindowViewModel : DependencyObject
     {
         //MainWindow n = new MainWindow();
+
+        public int ProgressBarMax
+        {
+            get { return (int)GetValue(ProgressBarMaxProperty); }
+            set { SetValue(ProgressBarMaxProperty, value); }
+        }
+        public static readonly DependencyProperty ProgressBarMaxProperty = DependencyProperty.Register("ProgressBarMaximum", typeof(Slider), typeof(MainWindowViewModel), new PropertyMetadata());
+
         public ObservableCollection<ent::Song> SongsList
         {
             get { return (ObservableCollection<ent::Song>)GetValue(ImagesListProperty); }

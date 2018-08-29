@@ -28,6 +28,7 @@ namespace Tempo.Presentation
         private bool userIsDraggingSlider = false;
         private readonly ViewModel.MainWindowViewModel vm;
         public ObservableCollection<Tempo.CloudModels.ListViewSong> CloudSongList;
+        DispatcherTimer timer = new DispatcherTimer();
        
         public MainWindow()
         {
@@ -37,24 +38,18 @@ namespace Tempo.Presentation
             this.DataContext = vm;
 
             CloudSongList = new ObservableCollection<ListViewSong>();
-
-            DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
-            //timer.Tick += timer_Tick;
-            timer.Start();
+            timer.Tick += timer_Tick;
+            //timer.Start();
             SetSongsToTable(GetAllSongsFromCloudLibrary());
 
         }
 
-        //private void timer_Tick(object sender, EventArgs e)
-        //{
-        //    if ((S.Source != null) && (mePlayer.NaturalDuration.HasTimeSpan) && (!userIsDraggingSlider))
-        //    {
-        //        sliProgress.Minimum = 0;
-        //        sliProgress.Maximum = mePlayer.NaturalDuration.TimeSpan.TotalSeconds;
-        //        sliProgress.Value = mePlayer.Position.TotalSeconds;
-        //    }
-        //}
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            sliProgress.Value++;
+        }
+
         private void sliProgress_DragStarted(object sender, DragStartedEventArgs e)
         {
             userIsDraggingSlider = true;
