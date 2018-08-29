@@ -126,7 +126,9 @@ namespace Tempo.Presentation
                 }
 
                 SongWithFileBytes songWithBytes = Newtonsoft.Json.JsonConvert.DeserializeObject<SongWithFileBytes>(json);
-                string path = "C:/Users/kdncrts/Music/Tempo/Downloads/";
+                string path = "";
+                path = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) + "/Tempo/Downloads/";
+                (new FileInfo(path)).Directory.Create();
                 //path += get to users music folder
                 //create tempo folder
                 path += songWithBytes.song.title + ".mp3";
