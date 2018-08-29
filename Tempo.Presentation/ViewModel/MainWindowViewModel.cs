@@ -13,12 +13,12 @@ namespace Tempo.Presentation.ViewModel
     {
         //MainWindow n = new MainWindow();
 
-        public int ProgressBarMax
+        public double ProgressBarMax
         {
-            get { return (int)GetValue(ProgressBarMaxProperty); }
-            set { SetValue(ProgressBarMaxProperty, value); }
+            get { return (double)GetValue(ProgressBarMaxProperty); }
+            set { SetValue(ProgressBarMaxProperty, (double)value); }
         }
-        public static readonly DependencyProperty ProgressBarMaxProperty = DependencyProperty.Register("ProgressBarMaximum", typeof(Slider), typeof(MainWindowViewModel), new PropertyMetadata());
+        public static readonly DependencyProperty ProgressBarMaxProperty = DependencyProperty.Register("ProgressBarMaximum", typeof(double), typeof(MainWindowViewModel), new PropertyMetadata());
 
         public ObservableCollection<ent::Song> SongsList
         {

@@ -36,6 +36,8 @@ namespace Tempo.Presentation
             InitializeComponent();
             vm = new ViewModel.MainWindowViewModel();
             this.DataContext = vm;
+            sliProgress.Minimum = 0;
+            sliProgress.Value = 0;
 
             CloudSongList = new ObservableCollection<ListViewSong>();
             timer.Interval = TimeSpan.FromSeconds(1);
@@ -109,7 +111,7 @@ namespace Tempo.Presentation
             try
             {
                 string json = "";
-                string httpRequestString = $"http://10.0.0.130:9578/music/getfile/{id}";
+                string httpRequestString = $"http://kaden.ghostsofutah.com:9578/music/getfile/{id}";
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(httpRequestString);
                 request.AutomaticDecompression = DecompressionMethods.GZip;
 
@@ -155,7 +157,7 @@ namespace Tempo.Presentation
             String genre = genreTextBox.Text;
 
             string json = string.Empty;
-            string httpRequestString =  $"http://10.0.0.130:9578/music/getSongs/title={title}&artist={artist}&genre={genre}";
+            string httpRequestString =  $"http://kaden.ghostsofutah.com:9578/music/getSongs/title={title}&artist={artist}&genre={genre}";
             // $"http://kaden.ghostsofutah.com:9578/music/getSongs/title={title}&artist={artist}&genre={genre}";
 
             Console.WriteLine(httpRequestString);
@@ -221,7 +223,7 @@ namespace Tempo.Presentation
         public static List<Song> GetAllSongsFromCloudLibrary()
         {
             string json = string.Empty;
-            string httpRequestString = "http://10.0.0.130:9578/music/getAllSongs";
+            string httpRequestString = "http://kaden.ghostsofutah.com:9578/music/getAllSongs";
             // "http://kaden.ghostsofutah.com:9578/music/getAllSongs";
 
             Console.WriteLine(httpRequestString);
@@ -311,7 +313,7 @@ namespace Tempo.Presentation
                     //  with a post request and the json in the body
 
                     var httpClient = new HttpClient();
-                    var response = await httpClient.PostAsync("http://10.0.0.130:9578/music/upload", new StringContent(songWithFileJson, System.Text.Encoding.UTF8, "application/json"));
+                    var response = await httpClient.PostAsync("http://kaden.ghostsofutah.com:9578/music/upload", new StringContent(songWithFileJson, System.Text.Encoding.UTF8, "application/json"));
                     // "http://kaden.ghostsofutah.com:9578/music/upload"
                     response.EnsureSuccessStatusCode();
 
